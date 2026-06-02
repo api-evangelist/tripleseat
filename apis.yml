@@ -1,0 +1,59 @@
+aid: tripleseat
+name: Tripleseat
+description: >-
+  Tripleseat is event management and catering sales software for restaurants,
+  hotels, and unique venues, helping operators capture leads, book events, and
+  manage the sales lifecycle. Tripleseat provides a public REST API and webhooks
+  for partners and customers to integrate event and lead data with external
+  systems. The API exposes endpoints for leads, accounts, users, and sites, and
+  supports a public lead form for capturing inquiries directly into Tripleseat.
+  Webhooks emit trigger events such as lead creation, lead conversion, and
+  booking changes, signed with an X-Signature header. Authentication moved from
+  OAuth 1.0 to OAuth 2.0, with v1 endpoints under api.tripleseat.com.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Restaurant
+  - Events
+  - Catering
+  - Leads
+  - Webhooks
+  - Sales
+url: https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/apis.yml
+created: '2026-06-02'
+modified: '2026-06-02'
+specificationVersion: '0.19'
+apis:
+  - aid: tripleseat:rest-api
+    name: Tripleseat API
+    description: >-
+      The Tripleseat REST API provides access to leads, accounts, users, and
+      sites for event and catering sales workflows. A public lead form endpoint
+      captures inquiries directly into Tripleseat, and webhooks emit events such
+      as CREATE_LEAD, CONVERT_LEAD, and CONVERT_LEAD_TO_BOOKING to subscriber
+      URLs. The API uses OAuth 2.0 authentication and is served from
+      api.tripleseat.com under the v1 path.
+    humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+    baseURL: https://api.tripleseat.com
+    tags:
+      - Leads
+      - Events
+      - Webhooks
+      - Accounts
+    properties:
+      - type: Documentation
+        url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+      - type: Authentication
+        url: https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+common:
+  - type: Website
+    url: https://tripleseat.com
+  - type: Documentation
+    url: https://support.tripleseat.com/hc/en-us/sections/200821727-Tripleseat-API
+  - type: Support
+    url: https://support.tripleseat.com/hc/en-us
+  - type: GitHubOrganization
+    url: https://github.com/tripleseat
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
