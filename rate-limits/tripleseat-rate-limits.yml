@@ -1,0 +1,65 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Tripleseat
+providerId: tripleseat
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Event Management
+  - Catering
+description: >-
+  Tripleseat enforces a documented rate limit of 10 requests per second on the
+  Leads and Events endpoint families (including their .json, .xml, and /search
+  variants). List endpoints paginate at 50 records per page via the page query
+  parameter. Webhook delivery is retried: if a subscriber does not return HTTP
+  200, Tripleseat re-sends the same POST up to five additional times. Limits
+  apply per API credential. Other endpoints are not documented with explicit
+  per-second numbers.
+sources:
+  - https://support.tripleseat.com/hc/en-us/articles/212171807-API-Events-Endpoint
+  - https://support.tripleseat.com/hc/en-us/articles/212528787-API-Leads-Endpoint
+  - https://support.tripleseat.com/hc/en-us/articles/40075780832919-API-Webhooks
+responseCodes:
+  throttled: 429
+limits:
+  - name: Leads endpoints
+    scope: key
+    metric: requests_per_second
+    limit: 10
+    timeFrame: second
+    notes: >-
+      Applies to /v1/leads, /v1/leads.json, /v1/leads.xml, /v1/leads/search,
+      /v1/leads/search.json, and /v1/leads/search.xml.
+  - name: Events endpoints
+    scope: key
+    metric: requests_per_second
+    limit: 10
+    timeFrame: second
+    notes: >-
+      Applies to /v1/events, /v1/events.json, /v1/events.xml, /v1/events/search,
+      /v1/events/search.json, and /v1/events/search.xml.
+  - name: Other endpoints
+    scope: key
+    metric: varies
+    limit: 'no explicit per-second limit documented'
+  - name: Pagination page size
+    scope: key
+    metric: varies
+    limit: '50 records per page (page query parameter)'
+policies:
+  - name: Pagination
+    description: >-
+      Paginated list endpoints return 50 records per page; iterate using the
+      page query parameter until the results array is empty.
+  - name: Webhook retry
+    description: >-
+      Subscribers must return HTTP 200 on receipt; otherwise Tripleseat re-sends
+      the same webhook POST up to five additional times. Verify the X-Signature
+      SHA256-HMAC header before processing.
+  - name: Endpoint scoping
+    description: >-
+      The 10 requests-per-second limit is scoped to the Leads and Events
+      endpoint families specifically, not the API as a whole.

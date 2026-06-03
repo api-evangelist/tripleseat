@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Location",
+  "description": "A venue within a site.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-schema/tripleseat-api-location-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier of the location.",
+      "example": 500123
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the location.",
+      "example": "Spring Gala Dinner"
+    },
+    "site_id": {
+      "type": "integer",
+      "description": "Identifier of the site the location belongs to.",
+      "example": 500123
+    },
+    "address": {
+      "type": "string",
+      "example": "123 Main Street"
+    },
+    "city": {
+      "type": "string",
+      "example": "Boston"
+    },
+    "state": {
+      "type": "string",
+      "example": "MA"
+    },
+    "zip_code": {
+      "type": "string",
+      "example": "02108"
+    }
+  }
+}

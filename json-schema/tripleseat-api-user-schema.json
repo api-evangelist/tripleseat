@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "User",
+  "description": "A person who can log into Tripleseat.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-schema/tripleseat-api-user-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier of the user.",
+      "example": 500123
+    },
+    "first_name": {
+      "type": "string",
+      "example": "Mark"
+    },
+    "last_name": {
+      "type": "string",
+      "example": "Lawrence"
+    },
+    "email_address": {
+      "type": "string",
+      "format": "email",
+      "example": "contact@example.com"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the user account is active.",
+      "example": true
+    }
+  }
+}

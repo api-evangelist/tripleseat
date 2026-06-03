@@ -1,0 +1,207 @@
+asyncapi: 3.0.0
+info:
+  title: Tripleseat Webhooks
+  version: v1
+  description: >-
+    Tripleseat webhooks POST a JSON package to a subscriber URL when a lead or
+    booking lifecycle event occurs. Each request carries an X-Signature header
+    computed with SHA256-HMAC using the webhook endpoint's signing key, which
+    subscribers should verify with a constant-time comparison. Subscribers must
+    return HTTP 200 on receipt; otherwise Tripleseat re-sends the same POST up to
+    five additional times. Webhooks are configured under Settings → Tripleseat
+    API.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  externalDocs:
+    description: Tripleseat API Webhooks
+    url: https://support.tripleseat.com/hc/en-us/articles/40075780832919-API-Webhooks
+defaultContentType: application/json
+servers:
+  subscriber:
+    host: example.com
+    protocol: https
+    description: >-
+      The subscriber endpoint URL you register in Tripleseat. Tripleseat POSTs
+      webhook payloads to this URL.
+channels:
+  webhook:
+    address: /
+    description: The subscriber URL that receives webhook POST requests.
+    messages:
+      leadCreated:
+        $ref: '#/components/messages/LeadCreated'
+      internalLeadCreated:
+        $ref: '#/components/messages/InternalLeadCreated'
+      leadConverted:
+        $ref: '#/components/messages/LeadConverted'
+      leadConvertedToBooking:
+        $ref: '#/components/messages/LeadConvertedToBooking'
+      leadTurnedDown:
+        $ref: '#/components/messages/LeadTurnedDown'
+operations:
+  receiveWebhook:
+    action: receive
+    channel:
+      $ref: '#/channels/webhook'
+    summary: Receive A Tripleseat Webhook
+    description: >-
+      Handle an inbound webhook POST from Tripleseat. Verify the X-Signature
+      header before processing, then return HTTP 200.
+    messages:
+    - $ref: '#/channels/webhook/messages/leadCreated'
+    - $ref: '#/channels/webhook/messages/internalLeadCreated'
+    - $ref: '#/channels/webhook/messages/leadConverted'
+    - $ref: '#/channels/webhook/messages/leadConvertedToBooking'
+    - $ref: '#/channels/webhook/messages/leadTurnedDown'
+components:
+  messages:
+    LeadCreated:
+      name: CREATE_LEAD
+      title: Lead Created
+      summary: A new lead was created (for example, via the public lead form).
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+      examples:
+      - name: LeadCreatedDefaultExample
+        summary: Default LeadCreated example payload
+        x-microcks-default: true
+        payload:
+          webhook_trigger_type: CREATE_LEAD
+          message: Lead was created
+          object:
+            id: 500123
+            name: Spring Gala Dinner
+            event_date: '2026-07-15'
+            status: definite
+    InternalLeadCreated:
+      name: CREATE_INTERNAL_LEAD
+      title: Internal Lead Created
+      summary: A lead was created internally within Tripleseat.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+      examples:
+      - name: InternalLeadCreatedDefaultExample
+        summary: Default InternalLeadCreated example payload
+        x-microcks-default: true
+        payload:
+          webhook_trigger_type: CREATE_INTERNAL_LEAD
+          message: Internal lead was created
+          object:
+            id: 500123
+            name: Spring Gala Dinner
+            event_date: '2026-07-15'
+            status: definite
+    LeadConverted:
+      name: CONVERT_LEAD
+      title: Lead Converted
+      summary: A lead was converted into an account and contact.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+      examples:
+      - name: LeadConvertedDefaultExample
+        summary: Default LeadConverted example payload
+        x-microcks-default: true
+        payload:
+          webhook_trigger_type: CONVERT_LEAD
+          message: Lead was converted to an account and contact
+          object:
+            id: 500123
+            name: Spring Gala Dinner
+            event_date: '2026-07-15'
+            status: definite
+    LeadConvertedToBooking:
+      name: CONVERT_LEAD_TO_BOOKING
+      title: Lead Converted To Booking
+      summary: A lead was converted into an event or booking.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+      examples:
+      - name: LeadConvertedToBookingDefaultExample
+        summary: Default LeadConvertedToBooking example payload
+        x-microcks-default: true
+        payload:
+          webhook_trigger_type: CONVERT_LEAD_TO_BOOKING
+          message: Lead was converted to a booking
+          object:
+            id: 500123
+            name: Spring Gala Dinner
+            event_date: '2026-07-15'
+            status: definite
+    LeadTurnedDown:
+      name: LEAD_TURNED_DOWN
+      title: Lead Turned Down
+      summary: A lead was turned down.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+      examples:
+      - name: LeadTurnedDownDefaultExample
+        summary: Default LeadTurnedDown example payload
+        x-microcks-default: true
+        payload:
+          webhook_trigger_type: LEAD_TURNED_DOWN
+          message: Lead was turned down
+          object:
+            id: 500123
+            name: Spring Gala Dinner
+            event_date: '2026-07-15'
+            status: definite
+  schemas:
+    WebhookHeaders:
+      type: object
+      properties:
+        X-Signature:
+          type: string
+          description: >-
+            SHA256-HMAC signature of the request payload computed with the
+            webhook endpoint's signing key. Verify with a constant-time
+            comparison.
+          example: example
+    WebhookPayload:
+      type: object
+      description: The JSON package POSTed to the subscriber URL.
+      properties:
+        webhook_trigger_type:
+          type: string
+          description: The trigger event type.
+          enum:
+          - CREATE_LEAD
+          - CREATE_INTERNAL_LEAD
+          - CONVERT_LEAD
+          - CONVERT_LEAD_TO_BOOKING
+          - LEAD_TURNED_DOWN
+          example: CREATE_LEAD
+        message:
+          type: string
+          description: A human-readable description of the event.
+          example: Lead was created
+        object:
+          type: object
+          description: >-
+            The full object payload for the event (for example, a lead or event
+            object with id, name, event_date, and status).
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            event_date:
+              type: string
+              format: date
+            status:
+              type: string

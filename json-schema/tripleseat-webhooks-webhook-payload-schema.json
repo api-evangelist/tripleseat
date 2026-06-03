@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WebhookPayload",
+  "description": "The JSON package POSTed to the subscriber URL.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-schema/tripleseat-webhooks-webhook-payload-schema.json",
+  "type": "object",
+  "properties": {
+    "webhook_trigger_type": {
+      "type": "string",
+      "description": "The trigger event type.",
+      "enum": [
+        "CREATE_LEAD",
+        "CREATE_INTERNAL_LEAD",
+        "CONVERT_LEAD",
+        "CONVERT_LEAD_TO_BOOKING",
+        "LEAD_TURNED_DOWN"
+      ],
+      "example": "CREATE_LEAD"
+    },
+    "message": {
+      "type": "string",
+      "description": "A human-readable description of the event.",
+      "example": "Lead was created"
+    },
+    "object": {
+      "type": "object",
+      "description": "The full object payload for the event (for example, a lead or event object with id, name, event_date, and status).",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "event_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

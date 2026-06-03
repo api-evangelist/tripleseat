@@ -1,0 +1,18 @@
+{
+  "id": 500123,
+  "first_name": "Mark",
+  "last_name": "Lawrence",
+  "email_address": "contact@example.com",
+  "phone_number": "+1-555-867-5309",
+  "company": "Acme Events Co.",
+  "event_description": "Evening reception with plated dinner.",
+  "event_date": "2026-07-15",
+  "start_time": "18:00",
+  "end_time": "22:00",
+  "guest_count": 75,
+  "additional_information": "Evening reception with plated dinner.",
+  "location_id": 500123,
+  "status": "definite",
+  "created_at": "2026-06-03T14:30:00Z",
+  "updated_at": "2026-06-03T14:30:00Z"
+}

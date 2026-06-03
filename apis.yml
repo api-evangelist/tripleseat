@@ -5,11 +5,13 @@ description: >-
   hotels, and unique venues, helping operators capture leads, book events, and
   manage the sales lifecycle. Tripleseat provides a public REST API and webhooks
   for partners and customers to integrate event and lead data with external
-  systems. The API exposes endpoints for leads, accounts, users, and sites, and
-  supports a public lead form for capturing inquiries directly into Tripleseat.
-  Webhooks emit trigger events such as lead creation, lead conversion, and
-  booking changes, signed with an X-Signature header. Authentication moved from
-  OAuth 1.0 to OAuth 2.0, with v1 endpoints under api.tripleseat.com.
+  systems. The API exposes endpoints for leads, events, accounts, contacts,
+  locations, sites, and users, and supports a public lead form for capturing
+  inquiries directly into Tripleseat. Webhooks emit trigger events such as
+  CREATE_LEAD, CONVERT_LEAD, and CONVERT_LEAD_TO_BOOKING, signed with a
+  SHA256-HMAC X-Signature header. Authentication moved from OAuth 1.0 to OAuth
+  2.0, with OAuth 1.0 discontinued on July 1, 2026, and v1 endpoints served from
+  api.tripleseat.com.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -21,18 +23,20 @@ tags:
   - Sales
 url: https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/apis.yml
 created: '2026-06-02'
-modified: '2026-06-02'
+modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
   - aid: tripleseat:rest-api
     name: Tripleseat API
     description: >-
-      The Tripleseat REST API provides access to leads, accounts, users, and
-      sites for event and catering sales workflows. A public lead form endpoint
-      captures inquiries directly into Tripleseat, and webhooks emit events such
-      as CREATE_LEAD, CONVERT_LEAD, and CONVERT_LEAD_TO_BOOKING to subscriber
-      URLs. The API uses OAuth 2.0 authentication and is served from
-      api.tripleseat.com under the v1 path.
+      The Tripleseat REST API provides access to leads, events, accounts,
+      contacts, locations, sites, and users for event and catering sales
+      workflows. A public lead form endpoint captures inquiries directly into
+      Tripleseat, and webhooks emit events such as CREATE_LEAD, CONVERT_LEAD,
+      and CONVERT_LEAD_TO_BOOKING to subscriber URLs. The API uses OAuth 2.0
+      authentication, paginates 50 records per page via the page parameter,
+      enforces a 10 requests-per-second limit on leads and events endpoints, and
+      is served from api.tripleseat.com under the v1 path.
     humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
     baseURL: https://api.tripleseat.com
     tags:
@@ -45,6 +49,140 @@ apis:
         url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
       - type: Authentication
         url: https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+      - type: APIReference
+        url: https://support.tripleseat.com/hc/en-us/sections/200821727-Tripleseat-API
+      - type: OpenAPI
+        url: openapi/tripleseat-openapi.yml
+      - type: AsyncAPI
+        url: asyncapi/tripleseat-webhooks-asyncapi.yml
+      - type: JSONSchema
+        url: json-schema/tripleseat-api-lead-schema.json
+        title: Lead Schema
+      - type: JSONSchema
+        url: json-schema/tripleseat-api-lead-create-schema.json
+        title: Lead Create Schema
+      - type: JSONSchema
+        url: json-schema/tripleseat-api-event-schema.json
+        title: Event Schema
+      - type: JSONSchema
+        url: json-schema/tripleseat-api-account-schema.json
+        title: Account Schema
+      - type: JSONSchema
+        url: json-schema/tripleseat-api-account-update-schema.json
+        title: Account Update Schema
+      - type: JSONSchema
+        url: json-schema/tripleseat-api-contact-schema.json
+        title: Contact Schema
+      - type: JSONSchema
+        url: json-schema/tripleseat-api-contact-create-schema.json
+        title: Contact Create Schema
+      - type: JSONSchema
+        url: json-schema/tripleseat-api-location-schema.json
+        title: Location Schema
+      - type: JSONSchema
+        url: json-schema/tripleseat-api-site-schema.json
+        title: Site Schema
+      - type: JSONSchema
+        url: json-schema/tripleseat-api-user-schema.json
+        title: User Schema
+      - type: JSONSchema
+        url: json-schema/tripleseat-webhooks-webhook-payload-schema.json
+        title: Webhook Payload Schema
+      - type: JSONSchema
+        url: json-schema/tripleseat-webhooks-webhook-headers-schema.json
+        title: Webhook Headers Schema
+      - type: JSONStructure
+        url: json-structure/tripleseat-api-lead-structure.json
+        title: Lead Structure
+      - type: JSONStructure
+        url: json-structure/tripleseat-api-event-structure.json
+        title: Event Structure
+      - type: JSONStructure
+        url: json-structure/tripleseat-api-account-structure.json
+        title: Account Structure
+      - type: JSONStructure
+        url: json-structure/tripleseat-api-contact-structure.json
+        title: Contact Structure
+      - type: JSONStructure
+        url: json-structure/tripleseat-api-lead-create-structure.json
+        title: Lead Create Structure
+      - type: JSONStructure
+        url: json-structure/tripleseat-api-account-update-structure.json
+        title: Account Update Structure
+      - type: JSONStructure
+        url: json-structure/tripleseat-api-contact-create-structure.json
+        title: Contact Create Structure
+      - type: JSONStructure
+        url: json-structure/tripleseat-api-location-structure.json
+        title: Location Structure
+      - type: JSONStructure
+        url: json-structure/tripleseat-api-site-structure.json
+        title: Site Structure
+      - type: JSONStructure
+        url: json-structure/tripleseat-api-user-structure.json
+        title: User Structure
+      - type: JSONStructure
+        url: json-structure/tripleseat-webhooks-webhook-payload-structure.json
+        title: Webhook Payload Structure
+      - type: JSONStructure
+        url: json-structure/tripleseat-webhooks-webhook-headers-structure.json
+        title: Webhook Headers Structure
+      - type: JSONLD
+        url: json-ld/tripleseat-api-context.jsonld
+        title: Tripleseat API Context
+      - type: JSONLD
+        url: json-ld/tripleseat-webhooks-context.jsonld
+        title: Tripleseat Webhooks Context
+      - type: Example
+        url: examples/tripleseat-api-lead-example.json
+        title: Lead Example
+      - type: Example
+        url: examples/tripleseat-api-event-example.json
+        title: Event Example
+      - type: Example
+        url: examples/tripleseat-api-account-example.json
+        title: Account Example
+      - type: Example
+        url: examples/tripleseat-api-contact-example.json
+        title: Contact Example
+      - type: Example
+        url: examples/tripleseat-api-lead-create-example.json
+        title: Lead Create Example
+      - type: Example
+        url: examples/tripleseat-api-account-update-example.json
+        title: Account Update Example
+      - type: Example
+        url: examples/tripleseat-api-contact-create-example.json
+        title: Contact Create Example
+      - type: Example
+        url: examples/tripleseat-api-location-example.json
+        title: Location Example
+      - type: Example
+        url: examples/tripleseat-api-site-example.json
+        title: Site Example
+      - type: Example
+        url: examples/tripleseat-api-user-example.json
+        title: User Example
+      - type: Example
+        url: examples/tripleseat-webhooks-webhook-payload-example.json
+        title: Webhook Payload Example
+      - type: Example
+        url: examples/tripleseat-webhooks-webhook-headers-example.json
+        title: Webhook Headers Example
+      - type: NaftikoCapability
+        url: capabilities/tripleseat-leads.yaml
+      - type: NaftikoCapability
+        url: capabilities/tripleseat-events.yaml
+      - type: NaftikoCapability
+        url: capabilities/tripleseat-accounts.yaml
+      - type: NaftikoCapability
+        url: capabilities/tripleseat-contacts.yaml
+      - type: NaftikoCapability
+        url: capabilities/tripleseat-locations.yaml
+      - type: NaftikoCapability
+        url: capabilities/tripleseat-sites.yaml
+      - type: NaftikoCapability
+        url: capabilities/tripleseat-users.yaml
 common:
   - type: Website
     url: https://tripleseat.com
@@ -54,6 +192,81 @@ common:
     url: https://support.tripleseat.com/hc/en-us
   - type: GitHubOrganization
     url: https://github.com/tripleseat
+  - type: Blog
+    url: https://tripleseat.com/blog/
+  - type: Marketplace
+    url: https://tripleseat.com/partnermarketplace/
+  - type: Partners
+    url: https://tripleseat.com/partner-types/integrations/
+  - type: Pricing
+    url: https://support.tripleseat.com/hc/en-us/sections/24155934375191-Registration-and-Pricing
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/tripleseat-software/
+  - type: SpectralRules
+    url: rules/tripleseat-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tripleseat-vocabulary.yaml
+  - type: Plans
+    url: plans/tripleseat-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/tripleseat-rate-limits.yml
+  - type: FinOps
+    url: finops/tripleseat-finops.yml
+  - type: Features
+    data:
+      - name: Lead Capture
+        description: >-
+          Capture inquiries through the public lead form API and the leads
+          endpoints, routing leads to the correct location.
+      - name: Event And Booking Management
+        description: >-
+          Retrieve and manage events and bookings across the sales lifecycle.
+      - name: Account And Contact CRM
+        description: >-
+          Maintain accounts and their associated contacts for customer records.
+      - name: Webhooks
+        description: >-
+          Subscribe to lead and booking lifecycle events, verified with a
+          SHA256-HMAC X-Signature header.
+      - name: Multi-Location Support
+        description: >-
+          Model sites that group multiple locations and target leads and events
+          at specific locations.
+  - type: UseCases
+    data:
+      - name: Website Lead Forms
+        description: >-
+          Embed a public lead form on a website to push inquiries directly into
+          Tripleseat via the lead form API.
+      - name: CRM And Marketing Sync
+        description: >-
+          Synchronize accounts, contacts, and events with external CRM and
+          email marketing platforms.
+      - name: Real-Time Integrations
+        description: >-
+          React to lead creation and conversion in real time using webhooks to
+          drive downstream automation.
+      - name: Reporting And Analytics
+        description: >-
+          Extract events and leads into data warehouses and dashboards for sales
+          reporting.
+  - type: Integrations
+    data:
+      - name: SevenRooms
+        description: >-
+          Reservation, seating, and guest management platform that shares
+          reservation and event details with Tripleseat.
+      - name: OpenTable Guest Center
+        description: >-
+          Connect Tripleseat events to OpenTable guest center bookings to avoid
+          double bookings.
+      - name: Tock
+        description: >-
+          Collect private event leads from Tock and transfer them into
+          Tripleseat.
+      - name: Square
+        description: >-
+          Tripleseat integration available through the Square App Marketplace.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

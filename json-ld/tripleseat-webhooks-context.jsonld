@@ -1,0 +1,42 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ts": "https://tripleseat.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "WebhookHeaders": "ts:WebhookHeaders",
+    "xSignature": {
+      "@id": "ts:X-Signature",
+      "@type": "xsd:string"
+    },
+    "WebhookPayload": "ts:WebhookPayload",
+    "webhookTriggerType": {
+      "@id": "ts:webhook_trigger_type",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "ts:message",
+      "@type": "xsd:string"
+    },
+    "object": {
+      "@id": "ts:object",
+      "@type": "@id"
+    },
+    "id": {
+      "@id": "ts:id",
+      "@type": "xsd:integer"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "eventDate": {
+      "@id": "ts:event_date",
+      "@type": "xsd:date"
+    },
+    "status": {
+      "@id": "ts:status",
+      "@type": "xsd:string"
+    }
+  }
+}

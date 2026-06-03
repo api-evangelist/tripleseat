@@ -1,0 +1,147 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Tripleseat
+providerId: tripleseat
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: false
+tags:
+  - Event Management
+  - Catering
+  - Restaurant
+  - Hospitality
+  - Subscription
+description: >-
+  Tripleseat does not publish list pricing; the core event and catering sales
+  platform is sold as a custom annual subscription quoted per venue, with cost
+  driven by the number of locations and selected add-ons (such as PartyPay and
+  Tripleseat Insights). Industry reviews commonly cite a single-venue base plan
+  in the $3,600-$6,000 per year range plus a one-time implementation fee of
+  roughly $500. The related Floorplans by Tripleseat product is published at a
+  flat monthly membership price. The REST API is included with the platform
+  subscription rather than metered separately. Prices below are sourced from
+  third-party review sites and Tripleseat's own Floorplans help center; confirm
+  with a Tripleseat sales quote before relying on them.
+sources:
+  - https://support.tripleseat.com/hc/en-us/sections/24155934375191-Registration-and-Pricing
+  - https://www.capterra.com/p/118047/Tripleseat/
+  - https://research.com/software/reviews/tripleseat
+  - https://floorplansbytripleseat.zendesk.com/hc/en-us/articles/25618957413527-What-does-a-Floorplans-by-Tripleseat-Membership-cost
+plans:
+  - id: tripleseat-platform
+    name: Tripleseat Platform
+    type: enterprise
+    description: >-
+      Custom-quoted annual subscription for the Tripleseat event and catering
+      sales platform, including the REST API and webhooks. Priced per venue.
+    entries:
+      - label: Platform subscription (single venue)
+        name: platform_subscription_single_venue
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: year
+        geo: US
+        unit: '1'
+        price: '$3,600 - $6,000 / year (single venue, contact sales)'
+        userMultiplied: false
+      - label: Multi-location pricing
+        name: platform_subscription_multi_location
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: year
+        geo: US
+        unit: '1'
+        price: 'custom (scales with number of venues)'
+        userMultiplied: false
+      - label: Implementation / setup fee
+        name: implementation_fee
+        type: flat
+        metric: varies
+        limit: 1
+        timeFrame: usage
+        geo: US
+        unit: '1'
+        price: '~$500 one-time'
+        userMultiplied: false
+    elements:
+      - name: Lead capture and lead forms
+      - name: Event and booking management
+      - name: Account and contact CRM
+      - name: REST API access
+      - name: Webhooks
+  - id: tripleseat-partypay-addon
+    name: PartyPay Add-On
+    type: subscription
+    description: >-
+      Optional payments add-on that increases monthly platform pricing.
+    entries:
+      - label: PartyPay add-on
+        name: partypay_addon
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: 'contact sales'
+        userMultiplied: false
+    elements:
+      - name: Online event payments
+  - id: tripleseat-insights-addon
+    name: Tripleseat Insights Add-On
+    type: subscription
+    description: >-
+      Optional analytics add-on that increases monthly platform pricing.
+    entries:
+      - label: Tripleseat Insights add-on
+        name: insights_addon
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: 'contact sales'
+        userMultiplied: false
+    elements:
+      - name: Sales and event analytics
+  - id: tripleseat-floorplans-professional
+    name: Floorplans Professional
+    type: subscription
+    description: >-
+      Floorplans by Tripleseat Professional membership for event diagramming.
+    entries:
+      - label: Floorplans Professional membership
+        name: floorplans_professional
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: '$29/month'
+        userMultiplied: false
+    elements:
+      - name: Event floorplan diagramming
+  - id: tripleseat-floorplans-all-access
+    name: Floorplans All Access
+    type: subscription
+    description: >-
+      Floorplans by Tripleseat All Access membership with greater customization.
+    entries:
+      - label: Floorplans All Access membership
+        name: floorplans_all_access
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: '1'
+        price: '$39/month'
+        userMultiplied: false
+    elements:
+      - name: Event floorplan diagramming
+      - name: Advanced customization

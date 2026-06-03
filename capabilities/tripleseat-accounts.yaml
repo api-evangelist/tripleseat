@@ -1,0 +1,169 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Tripleseat API — Accounts
+  description: 'Accounts — Retrieve and update accounts. 3 operations. Lead operation: List Accounts. Self-contained Naftiko capability covering one Tripleseat business surface.'
+  tags:
+  - Tripleseat
+  - Events
+  - Accounts
+  created: '2026-06-03'
+  modified: '2026-06-03'
+binds:
+- namespace: env
+  keys:
+    TRIPLESEAT_TOKEN: TRIPLESEAT_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: tripleseat-accounts
+    baseUri: https://api.tripleseat.com
+    description: Tripleseat API — Accounts business capability. Self-contained, no shared references.
+    authentication:
+      type: bearer
+      token: '{{env.TRIPLESEAT_TOKEN}}'
+    resources:
+    - name: v1-accounts-json
+      path: /v1/accounts.json
+      operations:
+      - name: listAccounts
+        method: GET
+        description: List Accounts
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: The page of results to return. Each page contains 50 records.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-accounts-account-id-json
+      path: /v1/accounts/{account_id}.json
+      operations:
+      - name: getAccount
+        method: GET
+        description: Get Account
+        inputParameters:
+        - name: account_id
+          in: path
+          type: integer
+          required: true
+          description: The unique identifier of the account.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-accounts-account-id-json
+      path: /v1/accounts/{account_id}.json
+      operations:
+      - name: updateAccount
+        method: PUT
+        description: Update Account
+        inputParameters:
+        - name: account_id
+          in: path
+          type: integer
+          required: true
+          description: The unique identifier of the account.
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: tripleseat-accounts-rest
+    port: 8080
+    description: REST adapter for Tripleseat API — Accounts. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/accounts-json
+      name: accounts-json
+      description: REST surface for List Accounts.
+      operations:
+      - method: GET
+        name: listAccounts
+        description: List Accounts
+        call: tripleseat-accounts.listAccounts
+        with:
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts-account-id-json
+      name: accounts-account-id-json
+      description: REST surface for Get Account.
+      operations:
+      - method: GET
+        name: getAccount
+        description: Get Account
+        call: tripleseat-accounts.getAccount
+        with:
+          account_id: rest.account_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts-account-id-json
+      name: accounts-account-id-json
+      description: REST surface for Update Account.
+      operations:
+      - method: PUT
+        name: updateAccount
+        description: Update Account
+        call: tripleseat-accounts.updateAccount
+        with:
+          account_id: rest.account_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tripleseat-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Tripleseat API — Accounts. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-accounts
+      description: List Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tripleseat-accounts.listAccounts
+      with:
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account
+      description: Get Account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tripleseat-accounts.getAccount
+      with:
+        account_id: tools.account_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-account
+      description: Update Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: tripleseat-accounts.updateAccount
+      with:
+        account_id: tools.account_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

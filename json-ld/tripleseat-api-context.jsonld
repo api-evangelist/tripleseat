@@ -1,0 +1,117 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ts": "https://tripleseat.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Lead": "ts:Lead",
+    "id": {
+      "@id": "ts:id",
+      "@type": "xsd:integer"
+    },
+    "firstName": {
+      "@id": "ts:first_name",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "ts:last_name",
+      "@type": "xsd:string"
+    },
+    "emailAddress": {
+      "@id": "ts:email_address",
+      "@type": "xsd:string"
+    },
+    "phoneNumber": {
+      "@id": "ts:phone_number",
+      "@type": "xsd:string"
+    },
+    "company": {
+      "@id": "ts:company",
+      "@type": "xsd:string"
+    },
+    "eventDescription": {
+      "@id": "ts:event_description",
+      "@type": "xsd:string"
+    },
+    "eventDate": {
+      "@id": "ts:event_date",
+      "@type": "xsd:date"
+    },
+    "startTime": {
+      "@id": "ts:start_time",
+      "@type": "xsd:string"
+    },
+    "endTime": {
+      "@id": "ts:end_time",
+      "@type": "xsd:string"
+    },
+    "guestCount": {
+      "@id": "ts:guest_count",
+      "@type": "xsd:integer"
+    },
+    "additionalInformation": {
+      "@id": "ts:additional_information",
+      "@type": "xsd:string"
+    },
+    "locationId": {
+      "@id": "ts:location_id",
+      "@type": "xsd:integer"
+    },
+    "status": {
+      "@id": "ts:status",
+      "@type": "xsd:string"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "LeadCreate": "ts:LeadCreate",
+    "Event": "ts:Event",
+    "name": {
+      "@id": "schema:name"
+    },
+    "accountId": {
+      "@id": "ts:account_id",
+      "@type": "xsd:integer"
+    },
+    "Account": "ts:Account",
+    "address": {
+      "@id": "ts:address",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "ts:city",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "ts:state",
+      "@type": "xsd:string"
+    },
+    "zipCode": {
+      "@id": "ts:zip_code",
+      "@type": "xsd:string"
+    },
+    "website": {
+      "@id": "schema:url"
+    },
+    "AccountUpdate": "ts:AccountUpdate",
+    "Contact": "ts:Contact",
+    "ContactCreate": "ts:ContactCreate",
+    "Location": "ts:Location",
+    "siteId": {
+      "@id": "ts:site_id",
+      "@type": "xsd:integer"
+    },
+    "Site": "ts:Site",
+    "User": "ts:User",
+    "active": {
+      "@id": "ts:active",
+      "@type": "xsd:boolean"
+    }
+  }
+}

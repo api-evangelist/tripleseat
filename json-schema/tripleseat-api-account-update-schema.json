@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccountUpdate",
+  "description": "Fields accepted when updating an account.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-schema/tripleseat-api-account-update-schema.json",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "Spring Gala Dinner"
+    },
+    "address": {
+      "type": "string",
+      "example": "123 Main Street"
+    },
+    "city": {
+      "type": "string",
+      "example": "Boston"
+    },
+    "state": {
+      "type": "string",
+      "example": "MA"
+    },
+    "zip_code": {
+      "type": "string",
+      "example": "02108"
+    },
+    "phone_number": {
+      "type": "string",
+      "example": "+1-555-867-5309"
+    },
+    "website": {
+      "type": "string",
+      "example": "https://example.com"
+    }
+  }
+}

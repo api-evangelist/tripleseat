@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-structure/tripleseat-api-lead-create-structure.json",
+  "name": "LeadCreate",
+  "description": "Fields accepted when creating a lead via the public lead form.",
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "example": "Mark"
+    },
+    "last_name": {
+      "type": "string",
+      "example": "Lawrence"
+    },
+    "email_address": {
+      "type": "string",
+      "example": "contact@example.com"
+    },
+    "phone_number": {
+      "type": "string",
+      "example": "+1-555-867-5309"
+    },
+    "company": {
+      "type": "string",
+      "example": "Acme Events Co."
+    },
+    "event_description": {
+      "type": "string",
+      "example": "Evening reception with plated dinner."
+    },
+    "event_date": {
+      "type": "date",
+      "example": "2026-07-15"
+    },
+    "start_time": {
+      "type": "string",
+      "example": "18:00"
+    },
+    "end_time": {
+      "type": "string",
+      "example": "22:00"
+    },
+    "guest_count": {
+      "type": "int32",
+      "example": 75
+    },
+    "additional_information": {
+      "type": "string",
+      "example": "Evening reception with plated dinner."
+    },
+    "location_id": {
+      "type": "int32",
+      "example": 500123
+    }
+  },
+  "required": [
+    "first_name",
+    "last_name",
+    "email_address"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-structure/tripleseat-api-event-structure.json",
+  "name": "Event",
+  "description": "A booked or in-progress event in the sales lifecycle.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique identifier of the event.",
+      "example": 500123
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the event.",
+      "example": "Spring Gala Dinner"
+    },
+    "event_date": {
+      "type": "date",
+      "description": "Date the event takes place.",
+      "example": "2026-07-15"
+    },
+    "start_time": {
+      "type": "string",
+      "description": "Start time of the event.",
+      "example": "18:00"
+    },
+    "end_time": {
+      "type": "string",
+      "description": "End time of the event.",
+      "example": "22:00"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the event.",
+      "example": "definite"
+    },
+    "guest_count": {
+      "type": "int32",
+      "description": "Number of guests for the event.",
+      "example": 75
+    },
+    "location_id": {
+      "type": "int32",
+      "description": "Identifier of the location hosting the event.",
+      "example": 500123
+    },
+    "account_id": {
+      "type": "int32",
+      "description": "Identifier of the account associated with the event.",
+      "example": 500123
+    },
+    "created_at": {
+      "type": "datetime",
+      "example": "2026-06-03T14:30:00Z"
+    },
+    "updated_at": {
+      "type": "datetime",
+      "example": "2026-06-03T14:30:00Z"
+    }
+  }
+}

@@ -1,0 +1,253 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: Tripleseat
+  description: >-
+    Unified vocabulary for the Tripleseat API, mapping the operational dimension
+    (REST operations and webhook events) to the capability dimension (Naftiko
+    business capabilities) for event and catering sales workflows.
+  created: '2026-06-03'
+  modified: '2026-06-03'
+
+# OPERATIONAL DIMENSION (from OpenAPI + AsyncAPI)
+operational:
+  apis:
+    - name: Tripleseat API
+      namespace: tripleseat
+      version: v1
+      baseUrl: https://api.tripleseat.com
+      status: active
+    - name: Tripleseat Webhooks
+      namespace: tripleseat-webhooks
+      version: v1
+      baseUrl: https://api.tripleseat.com
+      status: active
+  resources:
+    - name: leads
+      api: Tripleseat API
+      actions: [list, get, search, create]
+    - name: events
+      api: Tripleseat API
+      actions: [list, get, search]
+    - name: accounts
+      api: Tripleseat API
+      actions: [list, get, update]
+    - name: contacts
+      api: Tripleseat API
+      actions: [create]
+    - name: locations
+      api: Tripleseat API
+      actions: [list]
+    - name: sites
+      api: Tripleseat API
+      actions: [list]
+    - name: users
+      api: Tripleseat API
+      actions: [list, get]
+  actions:
+    - verb: list
+      httpMethod: GET
+      pattern: read
+    - verb: get
+      httpMethod: GET
+      pattern: read
+    - verb: search
+      httpMethod: GET
+      pattern: query
+    - verb: create
+      httpMethod: POST
+      pattern: write
+    - verb: update
+      httpMethod: PUT
+      pattern: write
+  schemas:
+    core:
+      - name: Lead
+        properties: [id, first_name, last_name, email_address, phone_number, company, event_date, guest_count, status]
+      - name: Event
+        properties: [id, name, event_date, start_time, end_time, status, guest_count, location_id, account_id]
+      - name: Account
+        properties: [id, name, address, city, state, zip_code, phone_number, website]
+      - name: Contact
+        properties: [id, first_name, last_name, email_address, phone_number, account_id]
+    structure:
+      - name: Location
+        properties: [id, name, site_id, address, city, state, zip_code]
+      - name: Site
+        properties: [id, name]
+      - name: User
+        properties: [id, first_name, last_name, email_address, active]
+    events:
+      - name: WebhookPayload
+        properties: [webhook_trigger_type, message, object]
+  parameters:
+    pagination:
+      - name: page
+        description: Page of results to return; 50 records per page.
+    identifiers:
+      - name: lead_id
+      - name: event_id
+      - name: account_id
+      - name: user_id
+      - name: location_id
+    filters:
+      - name: updated_after
+        description: Return records updated after a timestamp.
+      - name: order
+        description: Field to order event results by.
+      - name: sort_direction
+        description: Sort direction for ordered results.
+    authentication:
+      - name: public_key
+        description: Public key for the public lead form endpoint.
+  enums:
+    webhookTriggerTypes:
+      - CREATE_LEAD
+      - CREATE_INTERNAL_LEAD
+      - CONVERT_LEAD
+      - CONVERT_LEAD_TO_BOOKING
+      - LEAD_TURNED_DOWN
+    sortDirections:
+      - asc
+      - desc
+  authentication:
+    schemes:
+      - type: oauth2
+        flows: [clientCredentials, authorizationCode]
+        tokenUrl: https://api.tripleseat.com/oauth/token
+        tokenType: Bearer
+        tokenLifetimeSeconds: 7200
+        appliesTo: [Tripleseat API]
+        notes: >-
+          OAuth 1.0 is deprecated and discontinued on July 1, 2026; all
+          integrations must migrate to OAuth 2.0.
+      - type: hmac
+        header: X-Signature
+        algorithm: SHA256-HMAC
+        appliesTo: [Tripleseat Webhooks]
+        notes: Webhook payload signature verified with a constant-time comparison.
+
+# CAPABILITY DIMENSION (from Naftiko capabilities)
+capability:
+  workflows:
+    - name: Leads
+      file: capabilities/tripleseat-leads.yaml
+      apis: [Tripleseat API]
+      toolCount: 4
+      personas: [Sales Manager, Integration Developer]
+      domains: [Lead Capture]
+    - name: Events
+      file: capabilities/tripleseat-events.yaml
+      apis: [Tripleseat API]
+      toolCount: 3
+      personas: [Sales Manager, Operations Coordinator]
+      domains: [Event Management]
+    - name: Accounts
+      file: capabilities/tripleseat-accounts.yaml
+      apis: [Tripleseat API]
+      toolCount: 3
+      personas: [Sales Manager]
+      domains: [Customer Records]
+    - name: Contacts
+      file: capabilities/tripleseat-contacts.yaml
+      apis: [Tripleseat API]
+      toolCount: 1
+      personas: [Sales Manager]
+      domains: [Customer Records]
+    - name: Locations
+      file: capabilities/tripleseat-locations.yaml
+      apis: [Tripleseat API]
+      toolCount: 1
+      personas: [Operations Coordinator]
+      domains: [Venue Configuration]
+    - name: Sites
+      file: capabilities/tripleseat-sites.yaml
+      apis: [Tripleseat API]
+      toolCount: 1
+      personas: [Operations Coordinator]
+      domains: [Venue Configuration]
+    - name: Users
+      file: capabilities/tripleseat-users.yaml
+      apis: [Tripleseat API]
+      toolCount: 2
+      personas: [Administrator]
+      domains: [Access Management]
+  personas:
+    - id: sales-manager
+      name: Sales Manager
+      description: Captures and converts leads and manages event sales.
+      workflows: [Leads, Events, Accounts, Contacts]
+    - id: operations-coordinator
+      name: Operations Coordinator
+      description: Coordinates events across venues and locations.
+      workflows: [Events, Locations, Sites]
+    - id: integration-developer
+      name: Integration Developer
+      description: Builds integrations that ingest leads and react to webhooks.
+      workflows: [Leads]
+    - id: administrator
+      name: Administrator
+      description: Manages Tripleseat users and access.
+      workflows: [Users]
+  domains:
+    - name: Lead Capture
+      resources: [leads]
+    - name: Event Management
+      resources: [events]
+    - name: Customer Records
+      resources: [accounts, contacts]
+    - name: Venue Configuration
+      resources: [locations, sites]
+    - name: Access Management
+      resources: [users]
+  namespaces:
+    - consumed: tripleseat-leads
+      rest: tripleseat-leads-rest
+      mcp: tripleseat-leads-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: tripleseat-events
+      rest: tripleseat-events-rest
+      mcp: tripleseat-events-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: tripleseat-accounts
+      rest: tripleseat-accounts-rest
+      mcp: tripleseat-accounts-mcp
+      restPort: 8080
+      mcpPort: 9090
+  binds:
+    - key: TRIPLESEAT_TOKEN
+      description: OAuth 2.0 Bearer token for the Tripleseat API.
+      workflows: [Leads, Events, Accounts, Contacts, Locations, Sites, Users]
+
+# CROSS-REFERENCE
+crossReference:
+  - resource: leads
+    operations: [listLeads, getLead, searchLeads, createLead]
+    workflows: [Leads]
+    personas: [Sales Manager, Integration Developer]
+  - resource: events
+    operations: [listEvents, getEvent, searchEvents]
+    workflows: [Events]
+    personas: [Sales Manager, Operations Coordinator]
+  - resource: accounts
+    operations: [listAccounts, getAccount, updateAccount]
+    workflows: [Accounts]
+    personas: [Sales Manager]
+  - resource: contacts
+    operations: [createContact]
+    workflows: [Contacts]
+    personas: [Sales Manager]
+  - resource: locations
+    operations: [listLocations]
+    workflows: [Locations]
+    personas: [Operations Coordinator]
+  - resource: sites
+    operations: [listSites]
+    workflows: [Sites]
+    personas: [Operations Coordinator]
+  - resource: users
+    operations: [listUsers, getUser]
+    workflows: [Users]
+    personas: [Administrator]

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContactCreate",
+  "description": "Fields accepted when creating a contact.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-schema/tripleseat-api-contact-create-schema.json",
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "example": "Mark"
+    },
+    "last_name": {
+      "type": "string",
+      "example": "Lawrence"
+    },
+    "email_address": {
+      "type": "string",
+      "format": "email",
+      "example": "contact@example.com"
+    },
+    "phone_number": {
+      "type": "string",
+      "example": "+1-555-867-5309"
+    },
+    "account_id": {
+      "type": "integer",
+      "description": "Identifier of the account to associate the contact with.",
+      "example": 500123
+    }
+  },
+  "required": [
+    "first_name",
+    "account_id"
+  ]
+}

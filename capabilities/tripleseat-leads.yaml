@@ -1,0 +1,227 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Tripleseat API — Leads
+  description: 'Leads — Capture and retrieve leads, including the public lead form. 4 operations. Lead operation: List Leads. Self-contained Naftiko capability covering one Tripleseat business surface.'
+  tags:
+  - Tripleseat
+  - Events
+  - Leads
+  created: '2026-06-03'
+  modified: '2026-06-03'
+binds:
+- namespace: env
+  keys:
+    TRIPLESEAT_TOKEN: TRIPLESEAT_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: tripleseat-leads
+    baseUri: https://api.tripleseat.com
+    description: Tripleseat API — Leads business capability. Self-contained, no shared references.
+    authentication:
+      type: bearer
+      token: '{{env.TRIPLESEAT_TOKEN}}'
+    resources:
+    - name: v1-leads-json
+      path: /v1/leads.json
+      operations:
+      - name: listLeads
+        method: GET
+        description: List Leads
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: The page of results to return. Each page contains 50 records.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-leads-lead-id-json
+      path: /v1/leads/{lead_id}.json
+      operations:
+      - name: getLead
+        method: GET
+        description: Get Lead
+        inputParameters:
+        - name: lead_id
+          in: path
+          type: integer
+          required: true
+          description: The unique identifier of the lead.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-leads-search-json
+      path: /v1/leads/search.json
+      operations:
+      - name: searchLeads
+        method: GET
+        description: Search Leads
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: The page of results to return. Each page contains 50 records.
+        - name: updated_after
+          in: query
+          type: string
+          required: false
+          description: Return leads updated after this timestamp.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-leads-create-json
+      path: /v1/leads/create.json
+      operations:
+      - name: createLead
+        method: POST
+        description: Create Lead
+        inputParameters:
+        - name: public_key
+          in: query
+          type: string
+          required: true
+          description: The public key for the lead form site or location.
+        - name: location_id
+          in: query
+          type: integer
+          required: false
+          description: >-
+            The location the lead is intended for. Required when the site has
+            more than one location and not supplied in the body.
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: tripleseat-leads-rest
+    port: 8080
+    description: REST adapter for Tripleseat API — Leads. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/leads-json
+      name: leads-json
+      description: REST surface for List Leads.
+      operations:
+      - method: GET
+        name: listLeads
+        description: List Leads
+        call: tripleseat-leads.listLeads
+        with:
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/leads-lead-id-json
+      name: leads-lead-id-json
+      description: REST surface for Get Lead.
+      operations:
+      - method: GET
+        name: getLead
+        description: Get Lead
+        call: tripleseat-leads.getLead
+        with:
+          lead_id: rest.lead_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/leads-search-json
+      name: leads-search-json
+      description: REST surface for Search Leads.
+      operations:
+      - method: GET
+        name: searchLeads
+        description: Search Leads
+        call: tripleseat-leads.searchLeads
+        with:
+          page: rest.page
+          updated_after: rest.updated_after
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/leads-create-json
+      name: leads-create-json
+      description: REST surface for Create Lead.
+      operations:
+      - method: POST
+        name: createLead
+        description: Create Lead
+        call: tripleseat-leads.createLead
+        with:
+          public_key: rest.public_key
+          location_id: rest.location_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tripleseat-leads-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Tripleseat API — Leads. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-leads
+      description: List Leads
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tripleseat-leads.listLeads
+      with:
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-lead
+      description: Get Lead
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tripleseat-leads.getLead
+      with:
+        lead_id: tools.lead_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-leads
+      description: Search Leads
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tripleseat-leads.searchLeads
+      with:
+        page: tools.page
+        updated_after: tools.updated_after
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-lead
+      description: Create Lead
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tripleseat-leads.createLead
+      with:
+        public_key: tools.public_key
+        location_id: tools.location_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

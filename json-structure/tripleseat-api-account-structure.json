@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-structure/tripleseat-api-account-structure.json",
+  "name": "Account",
+  "description": "An organization or company record in Tripleseat.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique identifier of the account.",
+      "example": 500123
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the account.",
+      "example": "Spring Gala Dinner"
+    },
+    "address": {
+      "type": "string",
+      "description": "Street address of the account.",
+      "example": "123 Main Street"
+    },
+    "city": {
+      "type": "string",
+      "example": "Boston"
+    },
+    "state": {
+      "type": "string",
+      "example": "MA"
+    },
+    "zip_code": {
+      "type": "string",
+      "example": "02108"
+    },
+    "phone_number": {
+      "type": "string",
+      "example": "+1-555-867-5309"
+    },
+    "website": {
+      "type": "string",
+      "example": "https://example.com"
+    },
+    "created_at": {
+      "type": "datetime",
+      "example": "2026-06-03T14:30:00Z"
+    },
+    "updated_at": {
+      "type": "datetime",
+      "example": "2026-06-03T14:30:00Z"
+    }
+  }
+}

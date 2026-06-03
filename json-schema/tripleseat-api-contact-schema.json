@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Contact",
+  "description": "An individual associated with an account.",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-schema/tripleseat-api-contact-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier of the contact.",
+      "example": 500123
+    },
+    "first_name": {
+      "type": "string",
+      "example": "Mark"
+    },
+    "last_name": {
+      "type": "string",
+      "example": "Lawrence"
+    },
+    "email_address": {
+      "type": "string",
+      "format": "email",
+      "example": "contact@example.com"
+    },
+    "phone_number": {
+      "type": "string",
+      "example": "+1-555-867-5309"
+    },
+    "account_id": {
+      "type": "integer",
+      "description": "Identifier of the account this contact belongs to.",
+      "example": 500123
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-06-03T14:30:00Z"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-06-03T14:30:00Z"
+    }
+  }
+}

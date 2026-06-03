@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-structure/tripleseat-api-lead-structure.json",
+  "name": "Lead",
+  "description": "A potentially interested person or party for outreach.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique identifier of the lead.",
+      "example": 500123
+    },
+    "first_name": {
+      "type": "string",
+      "description": "First name of the lead contact.",
+      "example": "Mark"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Last name of the lead contact.",
+      "example": "Lawrence"
+    },
+    "email_address": {
+      "type": "string",
+      "description": "Email address of the lead contact.",
+      "example": "contact@example.com"
+    },
+    "phone_number": {
+      "type": "string",
+      "description": "Phone number of the lead contact.",
+      "example": "+1-555-867-5309"
+    },
+    "company": {
+      "type": "string",
+      "description": "Company associated with the lead.",
+      "example": "Acme Events Co."
+    },
+    "event_description": {
+      "type": "string",
+      "description": "Description of the event the lead is inquiring about.",
+      "example": "Evening reception with plated dinner."
+    },
+    "event_date": {
+      "type": "date",
+      "description": "Requested date of the event.",
+      "example": "2026-07-15"
+    },
+    "start_time": {
+      "type": "string",
+      "description": "Requested start time of the event.",
+      "example": "18:00"
+    },
+    "end_time": {
+      "type": "string",
+      "description": "Requested end time of the event.",
+      "example": "22:00"
+    },
+    "guest_count": {
+      "type": "int32",
+      "description": "Estimated number of guests.",
+      "example": 75
+    },
+    "additional_information": {
+      "type": "string",
+      "description": "Additional free-text information supplied with the lead.",
+      "example": "Evening reception with plated dinner."
+    },
+    "location_id": {
+      "type": "int32",
+      "description": "Identifier of the location the lead is intended for.",
+      "example": 500123
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the lead.",
+      "example": "definite"
+    },
+    "created_at": {
+      "type": "datetime",
+      "description": "Timestamp when the lead was created.",
+      "example": "2026-06-03T14:30:00Z"
+    },
+    "updated_at": {
+      "type": "datetime",
+      "description": "Timestamp when the lead was last updated.",
+      "example": "2026-06-03T14:30:00Z"
+    }
+  }
+}

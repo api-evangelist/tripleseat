@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WebhookHeaders",
+  "description": "WebhookHeaders schema from Tripleseat API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-schema/tripleseat-webhooks-webhook-headers-schema.json",
+  "type": "object",
+  "properties": {
+    "X-Signature": {
+      "type": "string",
+      "description": "SHA256-HMAC signature of the request payload computed with the webhook endpoint's signing key. Verify with a constant-time comparison.",
+      "example": "example"
+    }
+  }
+}

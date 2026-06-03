@@ -1,0 +1,288 @@
+# Spectral ruleset for the Tripleseat API
+# Enforces the conventions observed across the Tripleseat OpenAPI specification:
+# - Title prefix "Tripleseat"
+# - OpenAPI 3.1.0
+# - HTTPS server at api.tripleseat.com
+# - /v1 versioned, snake_case resource paths with .json suffix
+# - Title Case operation summaries, camelCase operationIds with verb prefixes
+# - Title Case tags
+# - snake_case parameters and schema properties
+# - page-based pagination
+# - OAuth 2.0 Bearer security
+extends:
+  - spectral:oas
+rules:
+
+  # ── INFO / METADATA ─────────────────────────────────────────────
+  info-title-prefix:
+    description: API title should start with "Tripleseat".
+    severity: warn
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: '^Tripleseat'
+  info-description-required:
+    description: API must have a description of at least 40 characters.
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: truthy
+  info-contact-required:
+    description: API must declare a contact.
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  # ── OPENAPI VERSION ─────────────────────────────────────────────
+  openapi-version-31:
+    description: Specs should target OpenAPI 3.1.0.
+    severity: warn
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: '^3\.1\.'
+
+  # ── SERVERS ─────────────────────────────────────────────────────
+  servers-defined:
+    description: At least one server must be defined.
+    severity: error
+    given: $.servers
+    then:
+      function: truthy
+  servers-https:
+    description: Servers must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+  servers-tripleseat-host:
+    description: Production server should be api.tripleseat.com.
+    severity: info
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: 'api\.tripleseat\.com'
+
+  # ── PATHS — NAMING CONVENTIONS ──────────────────────────────────
+  paths-version-prefix:
+    description: Paths should be versioned under /v1.
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^/v1/'
+  paths-snake-case:
+    description: Path segments should be lowercase snake_case (allowing path params and .json suffix).
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(/v1)?(/[a-z0-9_]+(\.[a-z]+)?|/\{[a-z_]+\}(\.[a-z]+)?)+$'
+  paths-no-trailing-slash:
+    description: Paths must not end with a trailing slash.
+    severity: error
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '.+/$'
+
+  # ── OPERATIONS ──────────────────────────────────────────────────
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+  operation-summary-title-case:
+    description: Operation summaries should be in Title Case.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z0-9]*(\s[A-Z0-9][A-Za-z0-9]*)*$'
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+  operation-id-required:
+    description: Every operation must have an operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+  operation-id-camel-case-verb:
+    description: operationId should be camelCase and start with a verb (get/list/create/update/delete/search).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(get|list|create|update|delete|search)[A-Z][A-Za-z0-9]*$'
+  operation-tags-required:
+    description: Every operation must declare at least one tag.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  # ── TAGS ────────────────────────────────────────────────────────
+  tags-global-defined:
+    description: A global tags array should be defined.
+    severity: info
+    given: $
+    then:
+      field: tags
+      function: truthy
+  tag-description-required:
+    description: Each global tag should have a description.
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+  tag-title-case:
+    description: Tag names should be in Title Case.
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z0-9]*(\s[A-Z0-9][A-Za-z0-9]*)*$'
+
+  # ── PARAMETERS ──────────────────────────────────────────────────
+  parameter-description-required:
+    description: Every parameter should have a description.
+    severity: warn
+    given: $.paths[*][*].parameters[*]
+    then:
+      field: description
+      function: truthy
+  parameter-snake-case:
+    description: Parameter names should be snake_case.
+    severity: warn
+    given: $.paths[*][*].parameters[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-z0-9_]*$'
+  parameter-pagination-page:
+    description: Pagination should use the page parameter.
+    severity: info
+    given: $.paths[*][*].parameters[?(@.in=='query' && (@.name=='offset' || @.name=='limit' || @.name=='cursor'))]
+    then:
+      function: falsy
+
+  # ── REQUEST BODIES ──────────────────────────────────────────────
+  request-body-json:
+    description: Request bodies should support application/json.
+    severity: warn
+    given: $.paths[*][post,put,patch].requestBody.content
+    then:
+      field: application/json
+      function: truthy
+
+  # ── RESPONSES ───────────────────────────────────────────────────
+  response-success-defined:
+    description: Each operation must define a 2xx response.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: ['200']
+            - required: ['201']
+            - required: ['202']
+            - required: ['204']
+  response-unauthorized-defined:
+    description: Operations should define a 401 response.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '401'
+      function: truthy
+  error-schema-message:
+    description: The Error schema should expose an error field.
+    severity: warn
+    given: $.components.schemas.Error.properties
+    then:
+      field: error
+      function: truthy
+
+  # ── SCHEMAS — PROPERTY NAMING ───────────────────────────────────
+  schema-property-snake-case:
+    description: Schema property names should be snake_case (X-Signature header is exempt).
+    severity: warn
+    given: $.components.schemas[*].properties[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: '^([a-z][a-z0-9_]*|X-Signature)$'
+  schema-id-integer:
+    description: id properties should be typed as integer.
+    severity: info
+    given: $.components.schemas[*].properties.id
+    then:
+      field: type
+      function: truthy
+
+  # ── SECURITY ────────────────────────────────────────────────────
+  security-global-defined:
+    description: A global security requirement should be defined.
+    severity: warn
+    given: $
+    then:
+      field: security
+      function: truthy
+  security-oauth2-scheme:
+    description: An oauth2 security scheme should be defined.
+    severity: warn
+    given: $.components.securitySchemes
+    then:
+      field: oauth2
+      function: truthy
+
+  # ── HTTP METHOD CONVENTIONS ─────────────────────────────────────
+  get-no-request-body:
+    description: GET operations must not declare a request body.
+    severity: error
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: falsy
+  post-put-request-body:
+    description: POST and PUT operations should declare a request body.
+    severity: warn
+    given: $.paths[*][post,put]
+    then:
+      field: requestBody
+      function: truthy
+
+  # ── GENERAL QUALITY ─────────────────────────────────────────────
+  examples-encouraged:
+    description: Operations are encouraged to provide response examples.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].responses[*].content.application/json
+    then:
+      field: examples
+      function: truthy

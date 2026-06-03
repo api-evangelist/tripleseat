@@ -1,0 +1,10 @@
+{
+  "webhook_trigger_type": "CREATE_LEAD",
+  "message": "Lead was created",
+  "object": {
+    "id": 793696,
+    "name": "Spring Gala Dinner",
+    "event_date": "2026-07-15",
+    "status": "definite"
+  }
+}

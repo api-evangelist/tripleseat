@@ -1,0 +1,12 @@
+{
+  "id": 500123,
+  "name": "Spring Gala Dinner",
+  "address": "123 Main Street",
+  "city": "Boston",
+  "state": "MA",
+  "zip_code": "02108",
+  "phone_number": "+1-555-867-5309",
+  "website": "https://example.com",
+  "created_at": "2026-06-03T14:30:00Z",
+  "updated_at": "2026-06-03T14:30:00Z"
+}

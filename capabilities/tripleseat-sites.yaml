@@ -1,0 +1,68 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Tripleseat API — Sites
+  description: 'Sites — Retrieve sites that group locations. 1 operations. Lead operation: List Sites. Self-contained Naftiko capability covering one Tripleseat business surface.'
+  tags:
+  - Tripleseat
+  - Events
+  - Sites
+  created: '2026-06-03'
+  modified: '2026-06-03'
+binds:
+- namespace: env
+  keys:
+    TRIPLESEAT_TOKEN: TRIPLESEAT_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: tripleseat-sites
+    baseUri: https://api.tripleseat.com
+    description: Tripleseat API — Sites business capability. Self-contained, no shared references.
+    authentication:
+      type: bearer
+      token: '{{env.TRIPLESEAT_TOKEN}}'
+    resources:
+    - name: v1-sites-json
+      path: /v1/sites.json
+      operations:
+      - name: listSites
+        method: GET
+        description: List Sites
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: tripleseat-sites-rest
+    port: 8080
+    description: REST adapter for Tripleseat API — Sites. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/sites-json
+      name: sites-json
+      description: REST surface for List Sites.
+      operations:
+      - method: GET
+        name: listSites
+        description: List Sites
+        call: tripleseat-sites.listSites
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tripleseat-sites-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Tripleseat API — Sites. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-sites
+      description: List Sites
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tripleseat-sites.listSites
+      outputParameters:
+      - type: object
+        mapping: $.

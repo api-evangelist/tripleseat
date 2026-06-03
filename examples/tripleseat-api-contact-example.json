@@ -1,0 +1,10 @@
+{
+  "id": 500123,
+  "first_name": "Mark",
+  "last_name": "Lawrence",
+  "email_address": "contact@example.com",
+  "phone_number": "+1-555-867-5309",
+  "account_id": 500123,
+  "created_at": "2026-06-03T14:30:00Z",
+  "updated_at": "2026-06-03T14:30:00Z"
+}

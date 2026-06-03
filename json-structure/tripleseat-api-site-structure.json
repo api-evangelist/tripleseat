@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/tripleseat/refs/heads/main/json-structure/tripleseat-api-site-structure.json",
+  "name": "Site",
+  "description": "A group of venues or locations.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique identifier of the site.",
+      "example": 500123
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the site.",
+      "example": "Spring Gala Dinner"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Tripleseat
+providerId: tripleseat
+created: '2026-06-03'
+modified: '2026-06-03'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Event Management
+  - Catering
+  - Hospitality
+description: >-
+  FOCUS-aligned FinOps for Tripleseat: a custom-quoted annual SaaS subscription
+  priced per venue, with optional monthly add-ons (PartyPay, Insights) and a
+  one-time implementation fee. The REST API is included in the subscription
+  rather than metered per call.
+sources:
+  - https://support.tripleseat.com/hc/en-us/sections/24155934375191-Registration-and-Pricing
+  - https://www.capterra.com/p/118047/Tripleseat/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Tripleseat LLC
+serviceCategory: Event Management
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+    - Purchase
+    - Usage
+    - Tax
+focusColumns:
+  ServiceName: Tripleseat
+  ServiceCategory: Event Management
+  ServiceSubcategory: Catering Sales Software
+  ProviderName: Tripleseat
+  PublisherName: Tripleseat LLC
+  InvoiceIssuerName: Tripleseat LLC
+  BillingCurrency: USD
+meters:
+  - name: platform_subscription
+    unit: month
+    aggregation: sum
+    dimensions:
+      - venue
+  - name: venues
+    unit: seat
+    aggregation: max
+    dimensions:
+      - location
+  - name: addon_subscription
+    unit: month
+    aggregation: sum
+    dimensions:
+      - addon
+  - name: implementation_fee
+    unit: varies
+    aggregation: count
+principles:
+  - name: Visibility
+    description: >-
+      Tripleseat does not expose a usage/billing API; cost visibility comes from
+      the contracted annual subscription, the per-venue count, and the line
+      items on the Tripleseat invoice (platform, add-ons, implementation).
+  - name: Allocation
+    description: >-
+      Attribute spend by venue and by add-on (PartyPay, Insights). For
+      multi-location operators, allocate the platform subscription across the
+      locations enabled in the contract.
+  - name: Optimization
+    description: >-
+      Optimize by right-sizing the number of contracted venues, deferring
+      optional add-ons until needed, and negotiating multi-location pricing at
+      renewal rather than paying per-venue list rates.
+  - name: Accountability
+    description: >-
+      Ownership sits with the operations or sales leader who signs the annual
+      contract; review add-on subscriptions and venue count at each renewal to
+      confirm they still match active usage.
