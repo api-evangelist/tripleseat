@@ -1,0 +1,380 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tripleseat API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.tripleseat.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Leads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/leads.json",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return. Each page contains 50 records."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of leads. Returns 50 records per page; use the page query parameter to page through results."
+        },
+        {
+          "info": {
+            "name": "Get Lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/leads/:lead_id.json",
+            "params": [
+              {
+                "name": "lead_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the lead."
+              }
+            ]
+          },
+          "docs": "Retrieve information for a single lead by its identifier."
+        },
+        {
+          "info": {
+            "name": "Search Leads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/leads/search.json",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return. Each page contains 50 records."
+              },
+              {
+                "name": "updated_after",
+                "value": "2026-06-03T14:30:00Z",
+                "type": "query",
+                "description": "Return leads updated after this timestamp."
+              }
+            ]
+          },
+          "docs": "Retrieve leads matching the supplied query parameters."
+        },
+        {
+          "info": {
+            "name": "Create Lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tripleseat.com/v1/leads/create.json",
+            "params": [
+              {
+                "name": "public_key",
+                "value": "example",
+                "type": "query",
+                "description": "The public key for the lead form site or location."
+              },
+              {
+                "name": "location_id",
+                "value": "500123",
+                "type": "query",
+                "description": "The location the lead is intended for. Required when the site has more than one location and not supplied in the body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a lead from a public lead form using a public key. The request body wraps lead fields in a lead object. If the site has more than one location, location_id must be supplied in the body or as a query parameter."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/events.json",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return. Each page contains 50 records."
+              },
+              {
+                "name": "order",
+                "value": "example",
+                "type": "query",
+                "description": "Field to order results by (for example, event_start)."
+              },
+              {
+                "name": "sort_direction",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort direction for the ordered field."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of events. Returns 50 records per page; use the page query parameter to page through results."
+        },
+        {
+          "info": {
+            "name": "Get Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/events/:event_id.json",
+            "params": [
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the event."
+              }
+            ]
+          },
+          "docs": "Retrieve information for a single event by its identifier."
+        },
+        {
+          "info": {
+            "name": "Search Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/events/search.json",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return. Each page contains 50 records."
+              },
+              {
+                "name": "updated_after",
+                "value": "2026-06-03T14:30:00Z",
+                "type": "query",
+                "description": "Return events updated after this timestamp."
+              }
+            ]
+          },
+          "docs": "Retrieve events matching the supplied query parameters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/accounts.json",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return. Each page contains 50 records."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of accounts."
+        },
+        {
+          "info": {
+            "name": "Get Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/accounts/:account_id.json",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the account."
+              }
+            ]
+          },
+          "docs": "Retrieve information for a single account by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.tripleseat.com/v1/accounts/:account_id.json",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing account by its identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tripleseat.com/v1/contacts.json",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a contact and associate it with an account. Every contact must be associated with an account via account_id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/locations.json"
+          },
+          "docs": "Retrieve all locations housed within a site."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Sites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/sites.json"
+          },
+          "docs": "Retrieve sites. A site represents a group of venues or locations. Creating, updating, or deleting sites via the API is not supported."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/users.json",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return. Each page contains 50 records."
+              }
+            ]
+          },
+          "docs": "Retrieve users who can log into your Tripleseat. Creating, updating, or deleting users via the API is not supported."
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/users/:user_id.json",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user."
+              }
+            ]
+          },
+          "docs": "Retrieve information for a single user by identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

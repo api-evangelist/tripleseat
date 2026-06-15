@@ -1,17 +1,13 @@
 aid: tripleseat
 name: Tripleseat
 description: >-
-  Tripleseat is event management and catering sales software for restaurants,
-  hotels, and unique venues, helping operators capture leads, book events, and
-  manage the sales lifecycle. Tripleseat provides a public REST API and webhooks
-  for partners and customers to integrate event and lead data with external
-  systems. The API exposes endpoints for leads, events, accounts, contacts,
-  locations, sites, and users, and supports a public lead form for capturing
-  inquiries directly into Tripleseat. Webhooks emit trigger events such as
-  CREATE_LEAD, CONVERT_LEAD, and CONVERT_LEAD_TO_BOOKING, signed with a
-  SHA256-HMAC X-Signature header. Authentication moved from OAuth 1.0 to OAuth
-  2.0, with OAuth 1.0 discontinued on July 1, 2026, and v1 endpoints served from
-  api.tripleseat.com.
+  Tripleseat is event management and catering sales software for restaurants, hotels, and unique venues, helping
+  operators capture leads, book events, and manage the sales lifecycle. Tripleseat provides a public REST API and
+  webhooks for partners and customers to integrate event and lead data with external systems. The API exposes endpoints
+  for leads, events, accounts, contacts, locations, sites, and users, and supports a public lead form for capturing
+  inquiries directly into Tripleseat. Webhooks emit trigger events such as CREATE_LEAD, CONVERT_LEAD, and
+  CONVERT_LEAD_TO_BOOKING, signed with a SHA256-HMAC X-Signature header. Authentication moved from OAuth 1.0 to OAuth
+  2.0, with OAuth 1.0 discontinued on July 1, 2026, and v1 endpoints served from api.tripleseat.com.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -29,14 +25,11 @@ apis:
   - aid: tripleseat:rest-api
     name: Tripleseat API
     description: >-
-      The Tripleseat REST API provides access to leads, events, accounts,
-      contacts, locations, sites, and users for event and catering sales
-      workflows. A public lead form endpoint captures inquiries directly into
-      Tripleseat, and webhooks emit events such as CREATE_LEAD, CONVERT_LEAD,
-      and CONVERT_LEAD_TO_BOOKING to subscriber URLs. The API uses OAuth 2.0
-      authentication, paginates 50 records per page via the page parameter,
-      enforces a 10 requests-per-second limit on leads and events endpoints, and
-      is served from api.tripleseat.com under the v1 path.
+      The Tripleseat REST API provides access to leads, events, accounts, contacts, locations, sites, and users for
+      event and catering sales workflows. A public lead form endpoint captures inquiries directly into Tripleseat, and
+      webhooks emit events such as CREATE_LEAD, CONVERT_LEAD, and CONVERT_LEAD_TO_BOOKING to subscriber URLs. The API
+      uses OAuth 2.0 authentication, paginates 50 records per page via the page parameter, enforces a 10
+      requests-per-second limit on leads and events endpoints, and is served from api.tripleseat.com under the v1 path.
     humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
     baseURL: https://api.tripleseat.com
     tags:
@@ -169,20 +162,6 @@ apis:
       - type: Example
         url: examples/tripleseat-webhooks-webhook-headers-example.json
         title: Webhook Headers Example
-      - type: NaftikoCapability
-        url: capabilities/tripleseat-leads.yaml
-      - type: NaftikoCapability
-        url: capabilities/tripleseat-events.yaml
-      - type: NaftikoCapability
-        url: capabilities/tripleseat-accounts.yaml
-      - type: NaftikoCapability
-        url: capabilities/tripleseat-contacts.yaml
-      - type: NaftikoCapability
-        url: capabilities/tripleseat-locations.yaml
-      - type: NaftikoCapability
-        url: capabilities/tripleseat-sites.yaml
-      - type: NaftikoCapability
-        url: capabilities/tripleseat-users.yaml
 common:
   - type: Website
     url: https://tripleseat.com
@@ -216,57 +195,36 @@ common:
     data:
       - name: Lead Capture
         description: >-
-          Capture inquiries through the public lead form API and the leads
-          endpoints, routing leads to the correct location.
+          Capture inquiries through the public lead form API and the leads endpoints, routing leads to the correct
+          location.
       - name: Event And Booking Management
-        description: >-
-          Retrieve and manage events and bookings across the sales lifecycle.
+        description: Retrieve and manage events and bookings across the sales lifecycle.
       - name: Account And Contact CRM
-        description: >-
-          Maintain accounts and their associated contacts for customer records.
+        description: Maintain accounts and their associated contacts for customer records.
       - name: Webhooks
-        description: >-
-          Subscribe to lead and booking lifecycle events, verified with a
-          SHA256-HMAC X-Signature header.
+        description: Subscribe to lead and booking lifecycle events, verified with a SHA256-HMAC X-Signature header.
       - name: Multi-Location Support
-        description: >-
-          Model sites that group multiple locations and target leads and events
-          at specific locations.
+        description: Model sites that group multiple locations and target leads and events at specific locations.
   - type: UseCases
     data:
       - name: Website Lead Forms
-        description: >-
-          Embed a public lead form on a website to push inquiries directly into
-          Tripleseat via the lead form API.
+        description: Embed a public lead form on a website to push inquiries directly into Tripleseat via the lead form API.
       - name: CRM And Marketing Sync
-        description: >-
-          Synchronize accounts, contacts, and events with external CRM and
-          email marketing platforms.
+        description: Synchronize accounts, contacts, and events with external CRM and email marketing platforms.
       - name: Real-Time Integrations
-        description: >-
-          React to lead creation and conversion in real time using webhooks to
-          drive downstream automation.
+        description: React to lead creation and conversion in real time using webhooks to drive downstream automation.
       - name: Reporting And Analytics
-        description: >-
-          Extract events and leads into data warehouses and dashboards for sales
-          reporting.
+        description: Extract events and leads into data warehouses and dashboards for sales reporting.
   - type: Integrations
     data:
       - name: SevenRooms
-        description: >-
-          Reservation, seating, and guest management platform that shares
-          reservation and event details with Tripleseat.
+        description: Reservation, seating, and guest management platform that shares reservation and event details with Tripleseat.
       - name: OpenTable Guest Center
-        description: >-
-          Connect Tripleseat events to OpenTable guest center bookings to avoid
-          double bookings.
+        description: Connect Tripleseat events to OpenTable guest center bookings to avoid double bookings.
       - name: Tock
-        description: >-
-          Collect private event leads from Tock and transfer them into
-          Tripleseat.
+        description: Collect private event leads from Tock and transfer them into Tripleseat.
       - name: Square
-        description: >-
-          Tripleseat integration available through the Square App Marketplace.
+        description: Tripleseat integration available through the Square App Marketplace.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
