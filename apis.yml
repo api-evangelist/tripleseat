@@ -126,40 +126,40 @@ apis:
       - type: JSONLD
         url: json-ld/tripleseat-webhooks-context.jsonld
         title: Tripleseat Webhooks Context
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-api-lead-example.json
         title: Lead Example
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-api-event-example.json
         title: Event Example
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-api-account-example.json
         title: Account Example
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-api-contact-example.json
         title: Contact Example
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-api-lead-create-example.json
         title: Lead Create Example
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-api-account-update-example.json
         title: Account Update Example
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-api-contact-create-example.json
         title: Contact Create Example
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-api-location-example.json
         title: Location Example
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-api-site-example.json
         title: Site Example
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-api-user-example.json
         title: User Example
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-webhooks-webhook-payload-example.json
         title: Webhook Payload Example
-      - type: Example
+      - type: Examples
         url: examples/tripleseat-webhooks-webhook-headers-example.json
         title: Webhook Headers Example
 common:
