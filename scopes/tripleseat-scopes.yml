@@ -1,0 +1,58 @@
+generated: '2026-07-11'
+method: searched
+source: openapi/tripleseat-openapi.yml
+docs: https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+note: Tripleseat OAuth 2.0 applications request the coarse read and write scopes in
+  the authorization flow; the migration guide's token exchange example also shows
+  granular per-resource scopes (events:read, events:write, leads:read, leads:write,
+  ...) determined by the OAuth 2.0 application's configuration, but no exhaustive
+  list of the granular scopes is published.
+schemes:
+- name: oauth2
+  source: openapi/tripleseat-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.tripleseat.com/oauth/token
+  - flow: authorizationCode
+    authorizationUrl: https://api.tripleseat.com/oauth/authorize
+    tokenUrl: https://api.tripleseat.com/oauth/token
+  description: OAuth 2.0. Access tokens are Bearer tokens that expire after 7200 seconds (2
+    hours) and are accompanied by a refresh token. OAuth 1.0 is deprecated and discontinued
+    on July 1, 2026.
+scopes:
+- scope: read
+  description: Read access to the Tripleseat API; requested in the documented OAuth
+    2.0 authorization flow (scope=read write) and returned in token responses.
+  sources:
+  - https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+  - https://support.tripleseat.com/hc/en-us/articles/35211389645079-OAuth-1-0-to-OAuth-2-0-Migration-Guide-for-Tripleseat-API
+- scope: write
+  description: Write access to the Tripleseat API; requested in the documented OAuth
+    2.0 authorization flow (scope=read write) and returned in token responses.
+  sources:
+  - https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+  - https://support.tripleseat.com/hc/en-us/articles/35211389645079-OAuth-1-0-to-OAuth-2-0-Migration-Guide-for-Tripleseat-API
+- scope: events:read
+  description: Granular read scope for events, shown in the OAuth 1.0-to-2.0 token
+    exchange example response; returned scopes are determined by the OAuth 2.0
+    application's configuration.
+  sources:
+  - https://support.tripleseat.com/hc/en-us/articles/35211389645079-OAuth-1-0-to-OAuth-2-0-Migration-Guide-for-Tripleseat-API
+- scope: events:write
+  description: Granular write scope for events, shown in the OAuth 1.0-to-2.0 token
+    exchange example response; returned scopes are determined by the OAuth 2.0
+    application's configuration.
+  sources:
+  - https://support.tripleseat.com/hc/en-us/articles/35211389645079-OAuth-1-0-to-OAuth-2-0-Migration-Guide-for-Tripleseat-API
+- scope: leads:read
+  description: Granular read scope for leads, shown in the OAuth 1.0-to-2.0 token
+    exchange example response; returned scopes are determined by the OAuth 2.0
+    application's configuration.
+  sources:
+  - https://support.tripleseat.com/hc/en-us/articles/35211389645079-OAuth-1-0-to-OAuth-2-0-Migration-Guide-for-Tripleseat-API
+- scope: leads:write
+  description: Granular write scope for leads, shown in the OAuth 1.0-to-2.0 token
+    exchange example response; returned scopes are determined by the OAuth 2.0
+    application's configuration.
+  sources:
+  - https://support.tripleseat.com/hc/en-us/articles/35211389645079-OAuth-1-0-to-OAuth-2-0-Migration-Guide-for-Tripleseat-API

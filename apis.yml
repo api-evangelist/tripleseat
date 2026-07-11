@@ -163,6 +163,10 @@ apis:
         url: examples/tripleseat-webhooks-webhook-headers-example.json
         title: Webhook Headers Example
 common:
+  - type: Authentication
+    url: authentication/tripleseat-authentication.yml
+  - type: OAuthScopes
+    url: scopes/tripleseat-scopes.yml
   - type: Website
     url: https://tripleseat.com
   - type: Documentation
