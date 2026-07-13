@@ -1,19 +1,25 @@
-# Spectral ruleset for the Tripleseat API
-# Enforces the conventions observed across the Tripleseat OpenAPI specification:
-# - Title prefix "Tripleseat"
-# - OpenAPI 3.1.0
-# - HTTPS server at api.tripleseat.com
-# - /v1 versioned, snake_case resource paths with .json suffix
-# - Title Case operation summaries, camelCase operationIds with verb prefixes
-# - Title Case tags
-# - snake_case parameters and schema properties
-# - page-based pagination
-# - OAuth 2.0 Bearer security
+# tripleseat — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on tripleseat.com
+#   - path-params-casing: snake @ 100% (n=5)
+#   - query-params-casing: snake @ 100% (n=12)
+#   - operationid-casing: camel @ 100% (n=15)
+#   - schema-names-casing: pascal @ 100% (n=11)
+#   - schema-properties-casing: snake @ 100% (n=85)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: Error
+#   - operation-documents-401: 100% adherence
+#   - pagination params observed: ['page']
+#   - merge: kept 33 existing, added 6 measured, upgraded 0
+#   - added: path-params-casing, query-params-casing, schema-names-casing, schema-properties-casing, error-schema-defined, no-empty-descriptions
 extends:
   - spectral:oas
 rules:
-
-  # ── INFO / METADATA ─────────────────────────────────────────────
   info-title-prefix:
     description: API title should start with "Tripleseat".
     severity: warn
@@ -21,7 +27,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^Tripleseat'
+        match: ^Tripleseat
   info-description-required:
     description: API must have a description of at least 40 characters.
     severity: warn
@@ -36,8 +42,6 @@ rules:
     then:
       field: contact
       function: truthy
-
-  # ── OPENAPI VERSION ─────────────────────────────────────────────
   openapi-version-31:
     description: Specs should target OpenAPI 3.1.0.
     severity: warn
@@ -45,9 +49,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^3\.1\.'
-
-  # ── SERVERS ─────────────────────────────────────────────────────
+        match: ^3\.1\.
   servers-defined:
     description: At least one server must be defined.
     severity: error
@@ -61,7 +63,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^https://'
+        match: ^https://
   servers-tripleseat-host:
     description: Production server should be api.tripleseat.com.
     severity: info
@@ -69,9 +71,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: 'api\.tripleseat\.com'
-
-  # ── PATHS — NAMING CONVENTIONS ──────────────────────────────────
+        match: api\.tripleseat\.com
   paths-version-prefix:
     description: Paths should be versioned under /v1.
     severity: warn
@@ -79,7 +79,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^/v1/'
+        match: ^/v1/
   paths-snake-case:
     description: Path segments should be lowercase snake_case (allowing path params and .json suffix).
     severity: warn
@@ -87,7 +87,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^(/v1)?(/[a-z0-9_]+(\.[a-z]+)?|/\{[a-z_]+\}(\.[a-z]+)?)+$'
+        match: ^(/v1)?(/[a-z0-9_]+(\.[a-z]+)?|/\{[a-z_]+\}(\.[a-z]+)?)+$
   paths-no-trailing-slash:
     description: Paths must not end with a trailing slash.
     severity: error
@@ -95,9 +95,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        notMatch: '.+/$'
-
-  # ── OPERATIONS ──────────────────────────────────────────────────
+        notMatch: .+/$
   operation-summary-required:
     description: Every operation must have a summary.
     severity: error
@@ -112,7 +110,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[A-Z][A-Za-z0-9]*(\s[A-Z0-9][A-Za-z0-9]*)*$'
+        match: ^[A-Z][A-Za-z0-9]*(\s[A-Z0-9][A-Za-z0-9]*)*$
   operation-description-required:
     description: Every operation must have a description.
     severity: warn
@@ -134,7 +132,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^(get|list|create|update|delete|search)[A-Z][A-Za-z0-9]*$'
+        match: ^(get|list|create|update|delete|search)[A-Z][A-Za-z0-9]*$
   operation-tags-required:
     description: Every operation must declare at least one tag.
     severity: warn
@@ -142,8 +140,6 @@ rules:
     then:
       field: tags
       function: truthy
-
-  # ── TAGS ────────────────────────────────────────────────────────
   tags-global-defined:
     description: A global tags array should be defined.
     severity: info
@@ -165,9 +161,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[A-Z][A-Za-z0-9]*(\s[A-Z0-9][A-Za-z0-9]*)*$'
-
-  # ── PARAMETERS ──────────────────────────────────────────────────
+        match: ^[A-Z][A-Za-z0-9]*(\s[A-Z0-9][A-Za-z0-9]*)*$
   parameter-description-required:
     description: Every parameter should have a description.
     severity: warn
@@ -182,15 +176,13 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[a-z][a-z0-9_]*$'
+        match: ^[a-z][a-z0-9_]*$
   parameter-pagination-page:
     description: Pagination should use the page parameter.
     severity: info
     given: $.paths[*][*].parameters[?(@.in=='query' && (@.name=='offset' || @.name=='limit' || @.name=='cursor'))]
     then:
       function: falsy
-
-  # ── REQUEST BODIES ──────────────────────────────────────────────
   request-body-json:
     description: Request bodies should support application/json.
     severity: warn
@@ -198,8 +190,6 @@ rules:
     then:
       field: application/json
       function: truthy
-
-  # ── RESPONSES ───────────────────────────────────────────────────
   response-success-defined:
     description: Each operation must define a 2xx response.
     severity: error
@@ -210,10 +200,14 @@ rules:
         schema:
           type: object
           anyOf:
-            - required: ['200']
-            - required: ['201']
-            - required: ['202']
-            - required: ['204']
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '202'
+          - required:
+            - '204'
   response-unauthorized-defined:
     description: Operations should define a 401 response.
     severity: info
@@ -228,8 +222,6 @@ rules:
     then:
       field: error
       function: truthy
-
-  # ── SCHEMAS — PROPERTY NAMING ───────────────────────────────────
   schema-property-snake-case:
     description: Schema property names should be snake_case (X-Signature header is exempt).
     severity: warn
@@ -237,7 +229,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^([a-z][a-z0-9_]*|X-Signature)$'
+        match: ^([a-z][a-z0-9_]*|X-Signature)$
   schema-id-integer:
     description: id properties should be typed as integer.
     severity: info
@@ -245,8 +237,6 @@ rules:
     then:
       field: type
       function: truthy
-
-  # ── SECURITY ────────────────────────────────────────────────────
   security-global-defined:
     description: A global security requirement should be defined.
     severity: warn
@@ -261,8 +251,6 @@ rules:
     then:
       field: oauth2
       function: truthy
-
-  # ── HTTP METHOD CONVENTIONS ─────────────────────────────────────
   get-no-request-body:
     description: GET operations must not declare a request body.
     severity: error
@@ -277,12 +265,58 @@ rules:
     then:
       field: requestBody
       function: truthy
-
-  # ── GENERAL QUALITY ─────────────────────────────────────────────
   examples-encouraged:
     description: Operations are encouraged to provide response examples.
     severity: info
     given: $.paths[*][get,post,put,patch,delete].responses[*].content.application/json
     then:
       field: examples
+      function: truthy
+  path-params-casing:
+    description: Path parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: snake
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  error-schema-defined:
+    description: A shared error schema (Error) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: Error
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
       function: truthy
