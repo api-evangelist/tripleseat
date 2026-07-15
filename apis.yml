@@ -163,6 +163,8 @@ apis:
         url: examples/tripleseat-webhooks-webhook-headers-example.json
         title: Webhook Headers Example
 common:
+  - type: AgenticAccess
+    url: agentic-access/tripleseat-agentic-access.yml
   - type: TrustCenter
     url: security/tripleseat-trust-center.yml
   - type: DomainSecurity
