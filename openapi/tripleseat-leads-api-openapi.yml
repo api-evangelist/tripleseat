@@ -1,0 +1,449 @@
+openapi: 3.1.0
+info:
+  title: Tripleseat Accounts Leads API
+  description: The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.
+  version: v1
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+    url: https://tripleseat.com/terms-of-service/
+  termsOfService: https://tripleseat.com/terms-of-service/
+servers:
+- url: https://api.tripleseat.com
+  description: Tripleseat Production API
+security:
+- oauth2: []
+tags:
+- name: Leads
+  description: Capture and retrieve leads, including the public lead form.
+paths:
+  /v1/leads.json:
+    get:
+      operationId: listLeads
+      summary: List Leads
+      description: Retrieve a paginated list of leads. Returns 50 records per page; use the page query parameter to page through results.
+      tags:
+      - Leads
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of leads.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Lead'
+              examples:
+                ListLeads200Example:
+                  summary: Default listLeads 200 response
+                  x-microcks-default: true
+                  value:
+                    results:
+                    - id: 500123
+                      first_name: Mark
+                      last_name: Lawrence
+                      email_address: contact@example.com
+                      phone_number: +1-555-867-5309
+                      company: Acme Events Co.
+                      event_description: Evening reception with plated dinner.
+                      event_date: '2026-07-15'
+                      start_time: '18:00'
+                      end_time: '22:00'
+                      guest_count: 75
+                      additional_information: Evening reception with plated dinner.
+                      location_id: 500123
+                      status: definite
+                      created_at: '2026-06-03T14:30:00Z'
+                      updated_at: '2026-06-03T14:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/leads/{lead_id}.json:
+    get:
+      operationId: getLead
+      summary: Get Lead
+      description: Retrieve information for a single lead by its identifier.
+      tags:
+      - Leads
+      parameters:
+      - $ref: '#/components/parameters/LeadId'
+      responses:
+        '200':
+          description: The requested lead.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lead'
+              examples:
+                GetLead200Example:
+                  summary: Default getLead 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 500123
+                    first_name: Mark
+                    last_name: Lawrence
+                    email_address: contact@example.com
+                    phone_number: +1-555-867-5309
+                    company: Acme Events Co.
+                    event_description: Evening reception with plated dinner.
+                    event_date: '2026-07-15'
+                    start_time: '18:00'
+                    end_time: '22:00'
+                    guest_count: 75
+                    additional_information: Evening reception with plated dinner.
+                    location_id: 500123
+                    status: definite
+                    created_at: '2026-06-03T14:30:00Z'
+                    updated_at: '2026-06-03T14:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/leads/search.json:
+    get:
+      operationId: searchLeads
+      summary: Search Leads
+      description: Retrieve leads matching the supplied query parameters.
+      tags:
+      - Leads
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - name: updated_after
+        in: query
+        description: Return leads updated after this timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+        example: '2026-06-03T14:30:00Z'
+      responses:
+        '200':
+          description: A paginated list of matching leads.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Lead'
+              examples:
+                SearchLeads200Example:
+                  summary: Default searchLeads 200 response
+                  x-microcks-default: true
+                  value:
+                    results:
+                    - id: 500123
+                      first_name: Mark
+                      last_name: Lawrence
+                      email_address: contact@example.com
+                      phone_number: +1-555-867-5309
+                      company: Acme Events Co.
+                      event_description: Evening reception with plated dinner.
+                      event_date: '2026-07-15'
+                      start_time: '18:00'
+                      end_time: '22:00'
+                      guest_count: 75
+                      additional_information: Evening reception with plated dinner.
+                      location_id: 500123
+                      status: definite
+                      created_at: '2026-06-03T14:30:00Z'
+                      updated_at: '2026-06-03T14:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/leads/create.json:
+    post:
+      operationId: createLead
+      summary: Create Lead
+      description: Create a lead from a public lead form using a public key. The request body wraps lead fields in a lead object. If the site has more than one location, location_id must be supplied in the body or as a query parameter.
+      tags:
+      - Leads
+      parameters:
+      - name: public_key
+        in: query
+        description: The public key for the lead form site or location.
+        required: true
+        schema:
+          type: string
+        example: example
+      - name: location_id
+        in: query
+        description: The location the lead is intended for. Required when the site has more than one location and not supplied in the body.
+        required: false
+        schema:
+          type: integer
+        example: 500123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lead:
+                  $ref: '#/components/schemas/LeadCreate'
+              required:
+              - lead
+            examples:
+              CreateLeadRequestExample:
+                summary: Default createLead request
+                x-microcks-default: true
+                value:
+                  lead:
+                    first_name: Mark
+                    last_name: Lawrence
+                    email_address: contact@example.com
+                    phone_number: +1-555-867-5309
+                    company: Acme Events Co.
+                    event_description: Evening reception with plated dinner.
+                    event_date: '2026-07-15'
+                    start_time: '18:00'
+                    end_time: '22:00'
+                    guest_count: 75
+                    additional_information: Evening reception with plated dinner.
+                    location_id: 500123
+      responses:
+        '201':
+          description: The lead was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lead'
+              examples:
+                CreateLead201Example:
+                  summary: Default createLead 201 response
+                  x-microcks-default: true
+                  value:
+                    id: 500123
+                    first_name: Mark
+                    last_name: Lawrence
+                    email_address: contact@example.com
+                    phone_number: +1-555-867-5309
+                    company: Acme Events Co.
+                    event_description: Evening reception with plated dinner.
+                    event_date: '2026-07-15'
+                    start_time: '18:00'
+                    end_time: '22:00'
+                    guest_count: 75
+                    additional_information: Evening reception with plated dinner.
+                    location_id: 500123
+                    status: definite
+                    created_at: '2026-06-03T14:30:00Z'
+                    updated_at: '2026-06-03T14:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    LeadCreate:
+      type: object
+      description: Fields accepted when creating a lead via the public lead form.
+      properties:
+        first_name:
+          type: string
+          example: Mark
+        last_name:
+          type: string
+          example: Lawrence
+        email_address:
+          type: string
+          format: email
+          example: contact@example.com
+        phone_number:
+          type: string
+          example: +1-555-867-5309
+        company:
+          type: string
+          example: Acme Events Co.
+        event_description:
+          type: string
+          example: Evening reception with plated dinner.
+        event_date:
+          type: string
+          format: date
+          example: '2026-07-15'
+        start_time:
+          type: string
+          example: '18:00'
+        end_time:
+          type: string
+          example: '22:00'
+        guest_count:
+          type: integer
+          example: 75
+        additional_information:
+          type: string
+          example: Evening reception with plated dinner.
+        location_id:
+          type: integer
+          example: 500123
+      required:
+      - first_name
+      - last_name
+      - email_address
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
+    Lead:
+      type: object
+      description: A potentially interested person or party for outreach.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the lead.
+          example: 500123
+        first_name:
+          type: string
+          description: First name of the lead contact.
+          example: Mark
+        last_name:
+          type: string
+          description: Last name of the lead contact.
+          example: Lawrence
+        email_address:
+          type: string
+          format: email
+          description: Email address of the lead contact.
+          example: contact@example.com
+        phone_number:
+          type: string
+          description: Phone number of the lead contact.
+          example: +1-555-867-5309
+        company:
+          type: string
+          description: Company associated with the lead.
+          example: Acme Events Co.
+        event_description:
+          type: string
+          description: Description of the event the lead is inquiring about.
+          example: Evening reception with plated dinner.
+        event_date:
+          type: string
+          format: date
+          description: Requested date of the event.
+          example: '2026-07-15'
+        start_time:
+          type: string
+          description: Requested start time of the event.
+          example: '18:00'
+        end_time:
+          type: string
+          description: Requested end time of the event.
+          example: '22:00'
+        guest_count:
+          type: integer
+          description: Estimated number of guests.
+          example: 75
+        additional_information:
+          type: string
+          description: Additional free-text information supplied with the lead.
+          example: Evening reception with plated dinner.
+        location_id:
+          type: integer
+          description: Identifier of the location the lead is intended for.
+          example: 500123
+        status:
+          type: string
+          description: Current status of the lead.
+          example: definite
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the lead was created.
+          example: '2026-06-03T14:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the lead was last updated.
+          example: '2026-06-03T14:30:00Z'
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: The page of results to return. Each page contains 50 records.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    LeadId:
+      name: lead_id
+      in: path
+      description: The unique identifier of the lead.
+      required: true
+      schema:
+        type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: The rate limit of 10 requests per second for the leads and events endpoints was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Access tokens are Bearer tokens that expire after 7200 seconds (2 hours) and are accompanied by a refresh token. OAuth 1.0 is deprecated and discontinued on July 1, 2026.
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tripleseat.com/oauth/authorize
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          refreshUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: Tripleseat API Overview
+  url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview

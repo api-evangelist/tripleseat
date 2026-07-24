@@ -1,0 +1,290 @@
+openapi: 3.1.0
+info:
+  title: Tripleseat Accounts Events API
+  description: The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.
+  version: v1
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+    url: https://tripleseat.com/terms-of-service/
+  termsOfService: https://tripleseat.com/terms-of-service/
+servers:
+- url: https://api.tripleseat.com
+  description: Tripleseat Production API
+security:
+- oauth2: []
+tags:
+- name: Events
+  description: Retrieve events and their bookings.
+paths:
+  /v1/events.json:
+    get:
+      operationId: listEvents
+      summary: List Events
+      description: Retrieve a paginated list of events. Returns 50 records per page; use the page query parameter to page through results.
+      tags:
+      - Events
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - name: order
+        in: query
+        description: Field to order results by (for example, event_start).
+        required: false
+        schema:
+          type: string
+        example: example
+      - name: sort_direction
+        in: query
+        description: Sort direction for the ordered field.
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        example: asc
+      responses:
+        '200':
+          description: A paginated list of events.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+              examples:
+                ListEvents200Example:
+                  summary: Default listEvents 200 response
+                  x-microcks-default: true
+                  value:
+                    results:
+                    - id: 500123
+                      name: Spring Gala Dinner
+                      event_date: '2026-07-15'
+                      start_time: '18:00'
+                      end_time: '22:00'
+                      status: definite
+                      guest_count: 75
+                      location_id: 500123
+                      account_id: 500123
+                      created_at: '2026-06-03T14:30:00Z'
+                      updated_at: '2026-06-03T14:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/events/{event_id}.json:
+    get:
+      operationId: getEvent
+      summary: Get Event
+      description: Retrieve information for a single event by its identifier.
+      tags:
+      - Events
+      parameters:
+      - $ref: '#/components/parameters/EventId'
+      responses:
+        '200':
+          description: The requested event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+              examples:
+                GetEvent200Example:
+                  summary: Default getEvent 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 500123
+                    name: Spring Gala Dinner
+                    event_date: '2026-07-15'
+                    start_time: '18:00'
+                    end_time: '22:00'
+                    status: definite
+                    guest_count: 75
+                    location_id: 500123
+                    account_id: 500123
+                    created_at: '2026-06-03T14:30:00Z'
+                    updated_at: '2026-06-03T14:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/events/search.json:
+    get:
+      operationId: searchEvents
+      summary: Search Events
+      description: Retrieve events matching the supplied query parameters.
+      tags:
+      - Events
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - name: updated_after
+        in: query
+        description: Return events updated after this timestamp.
+        required: false
+        schema:
+          type: string
+          format: date-time
+        example: '2026-06-03T14:30:00Z'
+      responses:
+        '200':
+          description: A paginated list of matching events.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+              examples:
+                SearchEvents200Example:
+                  summary: Default searchEvents 200 response
+                  x-microcks-default: true
+                  value:
+                    results:
+                    - id: 500123
+                      name: Spring Gala Dinner
+                      event_date: '2026-07-15'
+                      start_time: '18:00'
+                      end_time: '22:00'
+                      status: definite
+                      guest_count: 75
+                      location_id: 500123
+                      account_id: 500123
+                      created_at: '2026-06-03T14:30:00Z'
+                      updated_at: '2026-06-03T14:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: The page of results to return. Each page contains 50 records.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    EventId:
+      name: event_id
+      in: path
+      description: The unique identifier of the event.
+      required: true
+      schema:
+        type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: The rate limit of 10 requests per second for the leads and events endpoints was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
+    Event:
+      type: object
+      description: A booked or in-progress event in the sales lifecycle.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the event.
+          example: 500123
+        name:
+          type: string
+          description: Name of the event.
+          example: Spring Gala Dinner
+        event_date:
+          type: string
+          format: date
+          description: Date the event takes place.
+          example: '2026-07-15'
+        start_time:
+          type: string
+          description: Start time of the event.
+          example: '18:00'
+        end_time:
+          type: string
+          description: End time of the event.
+          example: '22:00'
+        status:
+          type: string
+          description: Current status of the event.
+          example: definite
+        guest_count:
+          type: integer
+          description: Number of guests for the event.
+          example: 75
+        location_id:
+          type: integer
+          description: Identifier of the location hosting the event.
+          example: 500123
+        account_id:
+          type: integer
+          description: Identifier of the account associated with the event.
+          example: 500123
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-06-03T14:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-06-03T14:30:00Z'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Access tokens are Bearer tokens that expire after 7200 seconds (2 hours) and are accompanied by a refresh token. OAuth 1.0 is deprecated and discontinued on July 1, 2026.
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tripleseat.com/oauth/authorize
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          refreshUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: Tripleseat API Overview
+  url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview

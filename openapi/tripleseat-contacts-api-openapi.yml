@@ -1,0 +1,177 @@
+openapi: 3.1.0
+info:
+  title: Tripleseat Accounts Contacts API
+  description: The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.
+  version: v1
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+    url: https://tripleseat.com/terms-of-service/
+  termsOfService: https://tripleseat.com/terms-of-service/
+servers:
+- url: https://api.tripleseat.com
+  description: Tripleseat Production API
+security:
+- oauth2: []
+tags:
+- name: Contacts
+  description: Create and associate contacts with accounts.
+paths:
+  /v1/contacts.json:
+    post:
+      operationId: createContact
+      summary: Create Contact
+      description: Create a contact and associate it with an account. Every contact must be associated with an account via account_id.
+      tags:
+      - Contacts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contact:
+                  $ref: '#/components/schemas/ContactCreate'
+              required:
+              - contact
+            examples:
+              CreateContactRequestExample:
+                summary: Default createContact request
+                x-microcks-default: true
+                value:
+                  contact:
+                    first_name: Mark
+                    last_name: Lawrence
+                    email_address: contact@example.com
+                    phone_number: +1-555-867-5309
+                    account_id: 500123
+      responses:
+        '201':
+          description: The contact was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+              examples:
+                CreateContact201Example:
+                  summary: Default createContact 201 response
+                  x-microcks-default: true
+                  value:
+                    id: 500123
+                    first_name: Mark
+                    last_name: Lawrence
+                    email_address: contact@example.com
+                    phone_number: +1-555-867-5309
+                    account_id: 500123
+                    created_at: '2026-06-03T14:30:00Z'
+                    updated_at: '2026-06-03T14:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
+    ContactCreate:
+      type: object
+      description: Fields accepted when creating a contact.
+      properties:
+        first_name:
+          type: string
+          example: Mark
+        last_name:
+          type: string
+          example: Lawrence
+        email_address:
+          type: string
+          format: email
+          example: contact@example.com
+        phone_number:
+          type: string
+          example: +1-555-867-5309
+        account_id:
+          type: integer
+          description: Identifier of the account to associate the contact with.
+          example: 500123
+      required:
+      - first_name
+      - account_id
+    Contact:
+      type: object
+      description: An individual associated with an account.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the contact.
+          example: 500123
+        first_name:
+          type: string
+          example: Mark
+        last_name:
+          type: string
+          example: Lawrence
+        email_address:
+          type: string
+          format: email
+          example: contact@example.com
+        phone_number:
+          type: string
+          example: +1-555-867-5309
+        account_id:
+          type: integer
+          description: Identifier of the account this contact belongs to.
+          example: 500123
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-06-03T14:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-06-03T14:30:00Z'
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Access tokens are Bearer tokens that expire after 7200 seconds (2 hours) and are accompanied by a refresh token. OAuth 1.0 is deprecated and discontinued on July 1, 2026.
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tripleseat.com/oauth/authorize
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          refreshUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: Tripleseat API Overview
+  url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview

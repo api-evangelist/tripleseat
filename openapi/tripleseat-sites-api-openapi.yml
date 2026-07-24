@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  title: Tripleseat Accounts Sites API
+  description: The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.
+  version: v1
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+    url: https://tripleseat.com/terms-of-service/
+  termsOfService: https://tripleseat.com/terms-of-service/
+servers:
+- url: https://api.tripleseat.com
+  description: Tripleseat Production API
+security:
+- oauth2: []
+tags:
+- name: Sites
+  description: Retrieve sites that group locations.
+paths:
+  /v1/sites.json:
+    get:
+      operationId: listSites
+      summary: List Sites
+      description: Retrieve sites. A site represents a group of venues or locations. Creating, updating, or deleting sites via the API is not supported.
+      tags:
+      - Sites
+      responses:
+        '200':
+          description: A list of sites.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Site'
+              examples:
+                ListSites200Example:
+                  summary: Default listSites 200 response
+                  x-microcks-default: true
+                  value:
+                    results:
+                    - id: 500123
+                      name: Spring Gala Dinner
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Site:
+      type: object
+      description: A group of venues or locations.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the site.
+          example: 500123
+        name:
+          type: string
+          description: Name of the site.
+          example: Spring Gala Dinner
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Access tokens are Bearer tokens that expire after 7200 seconds (2 hours) and are accompanied by a refresh token. OAuth 1.0 is deprecated and discontinued on July 1, 2026.
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tripleseat.com/oauth/authorize
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          refreshUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: Tripleseat API Overview
+  url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview

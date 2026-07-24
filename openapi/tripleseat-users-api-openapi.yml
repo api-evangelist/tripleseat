@@ -1,0 +1,173 @@
+openapi: 3.1.0
+info:
+  title: Tripleseat Accounts Users API
+  description: The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.
+  version: v1
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+    url: https://tripleseat.com/terms-of-service/
+  termsOfService: https://tripleseat.com/terms-of-service/
+servers:
+- url: https://api.tripleseat.com
+  description: Tripleseat Production API
+security:
+- oauth2: []
+tags:
+- name: Users
+  description: Retrieve Tripleseat users.
+paths:
+  /v1/users.json:
+    get:
+      operationId: listUsers
+      summary: List Users
+      description: Retrieve users who can log into your Tripleseat. Creating, updating, or deleting users via the API is not supported.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of users.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+              examples:
+                ListUsers200Example:
+                  summary: Default listUsers 200 response
+                  x-microcks-default: true
+                  value:
+                    results:
+                    - id: 500123
+                      first_name: Mark
+                      last_name: Lawrence
+                      email_address: contact@example.com
+                      active: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/users/{user_id}.json:
+    get:
+      operationId: getUser
+      summary: Get User
+      description: Retrieve information for a single user by identifier.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: The requested user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                GetUser200Example:
+                  summary: Default getUser 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 500123
+                    first_name: Mark
+                    last_name: Lawrence
+                    email_address: contact@example.com
+                    active: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    User:
+      type: object
+      description: A person who can log into Tripleseat.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the user.
+          example: 500123
+        first_name:
+          type: string
+          example: Mark
+        last_name:
+          type: string
+          example: Lawrence
+        email_address:
+          type: string
+          format: email
+          example: contact@example.com
+        active:
+          type: boolean
+          description: Whether the user account is active.
+          example: true
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: The page of results to return. Each page contains 50 records.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    UserId:
+      name: user_id
+      in: path
+      description: The unique identifier of the user.
+      required: true
+      schema:
+        type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Access tokens are Bearer tokens that expire after 7200 seconds (2 hours) and are accompanied by a refresh token. OAuth 1.0 is deprecated and discontinued on July 1, 2026.
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tripleseat.com/oauth/authorize
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          refreshUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: Tripleseat API Overview
+  url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview

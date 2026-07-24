@@ -1,0 +1,294 @@
+openapi: 3.1.0
+info:
+  title: Tripleseat Accounts API
+  description: The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.
+  version: v1
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  license:
+    name: Proprietary
+    url: https://tripleseat.com/terms-of-service/
+  termsOfService: https://tripleseat.com/terms-of-service/
+servers:
+- url: https://api.tripleseat.com
+  description: Tripleseat Production API
+security:
+- oauth2: []
+tags:
+- name: Accounts
+  description: Retrieve and update accounts.
+paths:
+  /v1/accounts.json:
+    get:
+      operationId: listAccounts
+      summary: List Accounts
+      description: Retrieve a paginated list of accounts.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of accounts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+              examples:
+                ListAccounts200Example:
+                  summary: Default listAccounts 200 response
+                  x-microcks-default: true
+                  value:
+                    results:
+                    - id: 500123
+                      name: Spring Gala Dinner
+                      address: 123 Main Street
+                      city: Boston
+                      state: MA
+                      zip_code: 02108
+                      phone_number: +1-555-867-5309
+                      website: https://example.com
+                      created_at: '2026-06-03T14:30:00Z'
+                      updated_at: '2026-06-03T14:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v1/accounts/{account_id}.json:
+    get:
+      operationId: getAccount
+      summary: Get Account
+      description: Retrieve information for a single account by its identifier.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      responses:
+        '200':
+          description: The requested account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                GetAccount200Example:
+                  summary: Default getAccount 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 500123
+                    name: Spring Gala Dinner
+                    address: 123 Main Street
+                    city: Boston
+                    state: MA
+                    zip_code: 02108
+                    phone_number: +1-555-867-5309
+                    website: https://example.com
+                    created_at: '2026-06-03T14:30:00Z'
+                    updated_at: '2026-06-03T14:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateAccount
+      summary: Update Account
+      description: Update an existing account by its identifier.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                account:
+                  $ref: '#/components/schemas/AccountUpdate'
+              required:
+              - account
+            examples:
+              UpdateAccountRequestExample:
+                summary: Default updateAccount request
+                x-microcks-default: true
+                value:
+                  account:
+                    name: Spring Gala Dinner
+                    address: 123 Main Street
+                    city: Boston
+                    state: MA
+                    zip_code: 02108
+                    phone_number: +1-555-867-5309
+                    website: https://example.com
+      responses:
+        '200':
+          description: The updated account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                UpdateAccount200Example:
+                  summary: Default updateAccount 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 500123
+                    name: Spring Gala Dinner
+                    address: 123 Main Street
+                    city: Boston
+                    state: MA
+                    zip_code: 02108
+                    phone_number: +1-555-867-5309
+                    website: https://example.com
+                    created_at: '2026-06-03T14:30:00Z'
+                    updated_at: '2026-06-03T14:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AccountUpdate:
+      type: object
+      description: Fields accepted when updating an account.
+      properties:
+        name:
+          type: string
+          example: Spring Gala Dinner
+        address:
+          type: string
+          example: 123 Main Street
+        city:
+          type: string
+          example: Boston
+        state:
+          type: string
+          example: MA
+        zip_code:
+          type: string
+          example: 02108
+        phone_number:
+          type: string
+          example: +1-555-867-5309
+        website:
+          type: string
+          example: https://example.com
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
+    Account:
+      type: object
+      description: An organization or company record in Tripleseat.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the account.
+          example: 500123
+        name:
+          type: string
+          description: Name of the account.
+          example: Spring Gala Dinner
+        address:
+          type: string
+          description: Street address of the account.
+          example: 123 Main Street
+        city:
+          type: string
+          example: Boston
+        state:
+          type: string
+          example: MA
+        zip_code:
+          type: string
+          example: 02108
+        phone_number:
+          type: string
+          example: +1-555-867-5309
+        website:
+          type: string
+          example: https://example.com
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-06-03T14:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-06-03T14:30:00Z'
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: The page of results to return. Each page contains 50 records.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    AccountId:
+      name: account_id
+      in: path
+      description: The unique identifier of the account.
+      required: true
+      schema:
+        type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0. Access tokens are Bearer tokens that expire after 7200 seconds (2 hours) and are accompanied by a refresh token. OAuth 1.0 is deprecated and discontinued on July 1, 2026.
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: https://api.tripleseat.com/oauth/authorize
+          tokenUrl: https://api.tripleseat.com/oauth/token
+          refreshUrl: https://api.tripleseat.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: Tripleseat API Overview
+  url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
