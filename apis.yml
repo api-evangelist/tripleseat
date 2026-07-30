@@ -9,7 +9,20 @@ description: >-
   CONVERT_LEAD_TO_BOOKING, signed with a SHA256-HMAC X-Signature header. Authentication moved from OAuth 1.0 to OAuth
   2.0, with OAuth 1.0 discontinued on July 1, 2026, and v1 endpoints served from api.tripleseat.com.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tripleseat.png
 tags:
   - Restaurant
   - Events
@@ -22,147 +35,667 @@ created: '2026-06-02'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: tripleseat:rest-api
-    name: Tripleseat API
-    description: >-
-      The Tripleseat REST API provides access to leads, events, accounts, contacts, locations, sites, and users for
-      event and catering sales workflows. A public lead form endpoint captures inquiries directly into Tripleseat, and
-      webhooks emit events such as CREATE_LEAD, CONVERT_LEAD, and CONVERT_LEAD_TO_BOOKING to subscriber URLs. The API
-      uses OAuth 2.0 authentication, paginates 50 records per page via the page parameter, enforces a 10
-      requests-per-second limit on leads and events endpoints, and is served from api.tripleseat.com under the v1 path.
-    humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
-    baseURL: https://api.tripleseat.com
-    tags:
-      - Leads
-      - Events
-      - Webhooks
-      - Accounts
-    properties:
-      - type: Documentation
-        url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
-      - type: Authentication
-        url: https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
-      - type: APIReference
-        url: https://support.tripleseat.com/hc/en-us/sections/200821727-Tripleseat-API
-      - type: OpenAPI
-        url: openapi/tripleseat-openapi.yml
-      - type: AsyncAPI
-        url: asyncapi/tripleseat-webhooks-asyncapi.yml
-      - type: JSONSchema
-        url: json-schema/tripleseat-api-lead-schema.json
-        title: Lead Schema
-      - type: JSONSchema
-        url: json-schema/tripleseat-api-lead-create-schema.json
-        title: Lead Create Schema
-      - type: JSONSchema
-        url: json-schema/tripleseat-api-event-schema.json
-        title: Event Schema
-      - type: JSONSchema
-        url: json-schema/tripleseat-api-account-schema.json
-        title: Account Schema
-      - type: JSONSchema
-        url: json-schema/tripleseat-api-account-update-schema.json
-        title: Account Update Schema
-      - type: JSONSchema
-        url: json-schema/tripleseat-api-contact-schema.json
-        title: Contact Schema
-      - type: JSONSchema
-        url: json-schema/tripleseat-api-contact-create-schema.json
-        title: Contact Create Schema
-      - type: JSONSchema
-        url: json-schema/tripleseat-api-location-schema.json
-        title: Location Schema
-      - type: JSONSchema
-        url: json-schema/tripleseat-api-site-schema.json
-        title: Site Schema
-      - type: JSONSchema
-        url: json-schema/tripleseat-api-user-schema.json
-        title: User Schema
-      - type: JSONSchema
-        url: json-schema/tripleseat-webhooks-webhook-payload-schema.json
-        title: Webhook Payload Schema
-      - type: JSONSchema
-        url: json-schema/tripleseat-webhooks-webhook-headers-schema.json
-        title: Webhook Headers Schema
-      - type: JSONStructure
-        url: json-structure/tripleseat-api-lead-structure.json
-        title: Lead Structure
-      - type: JSONStructure
-        url: json-structure/tripleseat-api-event-structure.json
-        title: Event Structure
-      - type: JSONStructure
-        url: json-structure/tripleseat-api-account-structure.json
-        title: Account Structure
-      - type: JSONStructure
-        url: json-structure/tripleseat-api-contact-structure.json
-        title: Contact Structure
-      - type: JSONStructure
-        url: json-structure/tripleseat-api-lead-create-structure.json
-        title: Lead Create Structure
-      - type: JSONStructure
-        url: json-structure/tripleseat-api-account-update-structure.json
-        title: Account Update Structure
-      - type: JSONStructure
-        url: json-structure/tripleseat-api-contact-create-structure.json
-        title: Contact Create Structure
-      - type: JSONStructure
-        url: json-structure/tripleseat-api-location-structure.json
-        title: Location Structure
-      - type: JSONStructure
-        url: json-structure/tripleseat-api-site-structure.json
-        title: Site Structure
-      - type: JSONStructure
-        url: json-structure/tripleseat-api-user-structure.json
-        title: User Structure
-      - type: JSONStructure
-        url: json-structure/tripleseat-webhooks-webhook-payload-structure.json
-        title: Webhook Payload Structure
-      - type: JSONStructure
-        url: json-structure/tripleseat-webhooks-webhook-headers-structure.json
-        title: Webhook Headers Structure
-      - type: JSONLD
-        url: json-ld/tripleseat-api-context.jsonld
-        title: Tripleseat API Context
-      - type: JSONLD
-        url: json-ld/tripleseat-webhooks-context.jsonld
-        title: Tripleseat Webhooks Context
-      - type: Examples
-        url: examples/tripleseat-api-lead-example.json
-        title: Lead Example
-      - type: Examples
-        url: examples/tripleseat-api-event-example.json
-        title: Event Example
-      - type: Examples
-        url: examples/tripleseat-api-account-example.json
-        title: Account Example
-      - type: Examples
-        url: examples/tripleseat-api-contact-example.json
-        title: Contact Example
-      - type: Examples
-        url: examples/tripleseat-api-lead-create-example.json
-        title: Lead Create Example
-      - type: Examples
-        url: examples/tripleseat-api-account-update-example.json
-        title: Account Update Example
-      - type: Examples
-        url: examples/tripleseat-api-contact-create-example.json
-        title: Contact Create Example
-      - type: Examples
-        url: examples/tripleseat-api-location-example.json
-        title: Location Example
-      - type: Examples
-        url: examples/tripleseat-api-site-example.json
-        title: Site Example
-      - type: Examples
-        url: examples/tripleseat-api-user-example.json
-        title: User Example
-      - type: Examples
-        url: examples/tripleseat-webhooks-webhook-payload-example.json
-        title: Webhook Payload Example
-      - type: Examples
-        url: examples/tripleseat-webhooks-webhook-headers-example.json
-        title: Webhook Headers Example
+- aid: tripleseat:tripleseat-accounts-api
+  name: Tripleseat Accounts API
+  description: Retrieve and update accounts.
+  humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  baseURL: https://api.tripleseat.com
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/tripleseat-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  - type: Authentication
+    url: https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+  - type: APIReference
+    url: https://support.tripleseat.com/hc/en-us/sections/200821727-Tripleseat-API
+  - type: AsyncAPI
+    url: asyncapi/tripleseat-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-event-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-update-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-location-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-site-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-user-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-headers-schema.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-event-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-update-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-location-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-site-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-user-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-payload-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-headers-structure.json
+  - type: JSONLD
+    url: json-ld/tripleseat-api-context.jsonld
+  - type: JSONLD
+    url: json-ld/tripleseat-webhooks-context.jsonld
+  - type: Examples
+    url: examples/tripleseat-api-lead-example.json
+  - type: Examples
+    url: examples/tripleseat-api-event-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-example.json
+  - type: Examples
+    url: examples/tripleseat-api-lead-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-update-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-location-example.json
+  - type: Examples
+    url: examples/tripleseat-api-site-example.json
+  - type: Examples
+    url: examples/tripleseat-api-user-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-payload-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-headers-example.json
+- aid: tripleseat:tripleseat-contacts-api
+  name: Tripleseat Contacts API
+  description: Create and associate contacts with accounts.
+  humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  baseURL: https://api.tripleseat.com
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/tripleseat-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  - type: Authentication
+    url: https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+  - type: APIReference
+    url: https://support.tripleseat.com/hc/en-us/sections/200821727-Tripleseat-API
+  - type: AsyncAPI
+    url: asyncapi/tripleseat-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-event-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-update-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-location-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-site-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-user-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-headers-schema.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-event-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-update-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-location-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-site-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-user-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-payload-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-headers-structure.json
+  - type: JSONLD
+    url: json-ld/tripleseat-api-context.jsonld
+  - type: JSONLD
+    url: json-ld/tripleseat-webhooks-context.jsonld
+  - type: Examples
+    url: examples/tripleseat-api-lead-example.json
+  - type: Examples
+    url: examples/tripleseat-api-event-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-example.json
+  - type: Examples
+    url: examples/tripleseat-api-lead-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-update-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-location-example.json
+  - type: Examples
+    url: examples/tripleseat-api-site-example.json
+  - type: Examples
+    url: examples/tripleseat-api-user-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-payload-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-headers-example.json
+- aid: tripleseat:tripleseat-events-api
+  name: Tripleseat Events API
+  description: Retrieve events and their bookings.
+  humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  baseURL: https://api.tripleseat.com
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/tripleseat-events-api-openapi.yml
+  - type: Documentation
+    url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  - type: Authentication
+    url: https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+  - type: APIReference
+    url: https://support.tripleseat.com/hc/en-us/sections/200821727-Tripleseat-API
+  - type: AsyncAPI
+    url: asyncapi/tripleseat-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-event-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-update-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-location-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-site-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-user-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-headers-schema.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-event-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-update-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-location-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-site-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-user-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-payload-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-headers-structure.json
+  - type: JSONLD
+    url: json-ld/tripleseat-api-context.jsonld
+  - type: JSONLD
+    url: json-ld/tripleseat-webhooks-context.jsonld
+  - type: Examples
+    url: examples/tripleseat-api-lead-example.json
+  - type: Examples
+    url: examples/tripleseat-api-event-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-example.json
+  - type: Examples
+    url: examples/tripleseat-api-lead-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-update-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-location-example.json
+  - type: Examples
+    url: examples/tripleseat-api-site-example.json
+  - type: Examples
+    url: examples/tripleseat-api-user-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-payload-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-headers-example.json
+- aid: tripleseat:tripleseat-leads-api
+  name: Tripleseat Leads API
+  description: Capture and retrieve leads, including the public lead form.
+  humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  baseURL: https://api.tripleseat.com
+  tags:
+  - Leads
+  properties:
+  - type: OpenAPI
+    url: openapi/tripleseat-leads-api-openapi.yml
+  - type: Documentation
+    url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  - type: Authentication
+    url: https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+  - type: APIReference
+    url: https://support.tripleseat.com/hc/en-us/sections/200821727-Tripleseat-API
+  - type: AsyncAPI
+    url: asyncapi/tripleseat-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-event-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-update-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-location-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-site-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-user-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-headers-schema.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-event-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-update-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-location-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-site-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-user-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-payload-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-headers-structure.json
+  - type: JSONLD
+    url: json-ld/tripleseat-api-context.jsonld
+  - type: JSONLD
+    url: json-ld/tripleseat-webhooks-context.jsonld
+  - type: Examples
+    url: examples/tripleseat-api-lead-example.json
+  - type: Examples
+    url: examples/tripleseat-api-event-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-example.json
+  - type: Examples
+    url: examples/tripleseat-api-lead-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-update-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-location-example.json
+  - type: Examples
+    url: examples/tripleseat-api-site-example.json
+  - type: Examples
+    url: examples/tripleseat-api-user-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-payload-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-headers-example.json
+- aid: tripleseat:tripleseat-locations-api
+  name: Tripleseat Locations API
+  description: Retrieve locations within a site.
+  humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  baseURL: https://api.tripleseat.com
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/tripleseat-locations-api-openapi.yml
+  - type: Documentation
+    url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  - type: Authentication
+    url: https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+  - type: APIReference
+    url: https://support.tripleseat.com/hc/en-us/sections/200821727-Tripleseat-API
+  - type: AsyncAPI
+    url: asyncapi/tripleseat-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-event-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-update-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-location-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-site-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-user-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-headers-schema.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-event-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-update-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-location-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-site-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-user-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-payload-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-headers-structure.json
+  - type: JSONLD
+    url: json-ld/tripleseat-api-context.jsonld
+  - type: JSONLD
+    url: json-ld/tripleseat-webhooks-context.jsonld
+  - type: Examples
+    url: examples/tripleseat-api-lead-example.json
+  - type: Examples
+    url: examples/tripleseat-api-event-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-example.json
+  - type: Examples
+    url: examples/tripleseat-api-lead-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-update-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-location-example.json
+  - type: Examples
+    url: examples/tripleseat-api-site-example.json
+  - type: Examples
+    url: examples/tripleseat-api-user-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-payload-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-headers-example.json
+- aid: tripleseat:tripleseat-sites-api
+  name: Tripleseat Sites API
+  description: Retrieve sites that group locations.
+  humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  baseURL: https://api.tripleseat.com
+  tags:
+  - Sites
+  properties:
+  - type: OpenAPI
+    url: openapi/tripleseat-sites-api-openapi.yml
+  - type: Documentation
+    url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  - type: Authentication
+    url: https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+  - type: APIReference
+    url: https://support.tripleseat.com/hc/en-us/sections/200821727-Tripleseat-API
+  - type: AsyncAPI
+    url: asyncapi/tripleseat-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-event-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-update-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-location-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-site-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-user-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-headers-schema.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-event-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-update-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-location-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-site-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-user-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-payload-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-headers-structure.json
+  - type: JSONLD
+    url: json-ld/tripleseat-api-context.jsonld
+  - type: JSONLD
+    url: json-ld/tripleseat-webhooks-context.jsonld
+  - type: Examples
+    url: examples/tripleseat-api-lead-example.json
+  - type: Examples
+    url: examples/tripleseat-api-event-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-example.json
+  - type: Examples
+    url: examples/tripleseat-api-lead-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-update-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-location-example.json
+  - type: Examples
+    url: examples/tripleseat-api-site-example.json
+  - type: Examples
+    url: examples/tripleseat-api-user-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-payload-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-headers-example.json
+- aid: tripleseat:tripleseat-users-api
+  name: Tripleseat Users API
+  description: Retrieve Tripleseat users.
+  humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  baseURL: https://api.tripleseat.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/tripleseat-users-api-openapi.yml
+  - type: Documentation
+    url: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
+  - type: Authentication
+    url: https://support.tripleseat.com/hc/en-us/articles/19394408627479-API-Authentication
+  - type: APIReference
+    url: https://support.tripleseat.com/hc/en-us/sections/200821727-Tripleseat-API
+  - type: AsyncAPI
+    url: asyncapi/tripleseat-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-lead-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-event-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-account-update-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-contact-create-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-location-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-site-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-api-user-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/tripleseat-webhooks-webhook-headers-schema.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-event-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-lead-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-account-update-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-contact-create-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-location-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-site-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-api-user-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-payload-structure.json
+  - type: JSONStructure
+    url: json-structure/tripleseat-webhooks-webhook-headers-structure.json
+  - type: JSONLD
+    url: json-ld/tripleseat-api-context.jsonld
+  - type: JSONLD
+    url: json-ld/tripleseat-webhooks-context.jsonld
+  - type: Examples
+    url: examples/tripleseat-api-lead-example.json
+  - type: Examples
+    url: examples/tripleseat-api-event-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-example.json
+  - type: Examples
+    url: examples/tripleseat-api-lead-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-account-update-example.json
+  - type: Examples
+    url: examples/tripleseat-api-contact-create-example.json
+  - type: Examples
+    url: examples/tripleseat-api-location-example.json
+  - type: Examples
+    url: examples/tripleseat-api-site-example.json
+  - type: Examples
+    url: examples/tripleseat-api-user-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-payload-example.json
+  - type: Examples
+    url: examples/tripleseat-webhooks-webhook-headers-example.json
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/tripleseat/overview
   - type: AgenticAccess
     url: agentic-access/tripleseat-agentic-access.yml
   - type: TrustCenter
