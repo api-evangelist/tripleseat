@@ -1,0 +1,691 @@
+{
+  "info": {
+    "_postman_id": "0d09ce1c-a9fd-42e7-9933-19fd4a2ef58d",
+    "name": "Tripleseat Accounts Events API",
+    "description": "The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:37.000Z",
+    "updatedAt": "2026-07-28T03:19:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0d09ce1c-a9fd-42e7-9933-19fd4a2ef58d"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "events.json",
+          "item": [
+            {
+              "name": "List Events",
+              "id": "d824932b-8f81-4634-82b4-2491d5ea6237",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/events.json?page=1&order=<string>&sort_direction=asc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "events.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "The page of results to return. Each page contains 50 records.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Field to order results by (for example, event_start).",
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort direction for the ordered field.",
+                      "key": "sort_direction",
+                      "value": "asc"
+                    }
+                  ]
+                },
+                "description": "Retrieve a paginated list of events. Returns 50 records per page; use the page query parameter to page through results."
+              },
+              "response": [
+                {
+                  "id": "18d489f3-d5fe-4248-afa9-840c6d9a1977",
+                  "name": "A paginated list of events.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/events.json?page=1&order=<string>&sort_direction=asc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "events.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Field to order results by (for example, event_start).",
+                          "key": "order",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort direction for the ordered field.",
+                          "key": "sort_direction",
+                          "value": "asc"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"results\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"event_date\": \"<date>\",\n      \"start_time\": \"<string>\",\n      \"end_time\": \"<string>\",\n      \"status\": \"<string>\",\n      \"guest_count\": \"<integer>\",\n      \"location_id\": \"<integer>\",\n      \"account_id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"event_date\": \"<date>\",\n      \"start_time\": \"<string>\",\n      \"end_time\": \"<string>\",\n      \"status\": \"<string>\",\n      \"guest_count\": \"<integer>\",\n      \"location_id\": \"<integer>\",\n      \"account_id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:38.000Z",
+                  "updatedAt": "2026-07-28T03:19:38.000Z",
+                  "uid": "35240-18d489f3-d5fe-4248-afa9-840c6d9a1977"
+                },
+                {
+                  "id": "37437d5d-934d-41d2-92f3-9712dc8e17d4",
+                  "name": "Authentication credentials were missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/events.json?page=1&order=<string>&sort_direction=asc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "events.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Field to order results by (for example, event_start).",
+                          "key": "order",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort direction for the ordered field.",
+                          "key": "sort_direction",
+                          "value": "asc"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T03:19:38.000Z",
+                  "updatedAt": "2026-07-28T03:19:38.000Z",
+                  "uid": "35240-37437d5d-934d-41d2-92f3-9712dc8e17d4"
+                },
+                {
+                  "id": "7e1276dc-1305-4aff-8224-b2460b89b31b",
+                  "name": "The rate limit of 10 requests per second for the leads and events endpoints was exceeded.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/events.json?page=1&order=<string>&sort_direction=asc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "events.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Field to order results by (for example, event_start).",
+                          "key": "order",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort direction for the ordered field.",
+                          "key": "sort_direction",
+                          "value": "asc"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T03:19:38.000Z",
+                  "updatedAt": "2026-07-28T03:19:38.000Z",
+                  "uid": "35240-7e1276dc-1305-4aff-8224-b2460b89b31b"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:38.000Z",
+              "updatedAt": "2026-07-28T03:19:38.000Z",
+              "uid": "35240-d824932b-8f81-4634-82b4-2491d5ea6237"
+            }
+          ],
+          "id": "267d4db1-54cd-439b-9b99-54a61eeec4a8",
+          "createdAt": "2026-07-28T03:19:38.000Z",
+          "updatedAt": "2026-07-28T03:19:38.000Z",
+          "uid": "35240-267d4db1-54cd-439b-9b99-54a61eeec4a8"
+        },
+        {
+          "name": "events",
+          "item": [
+            {
+              "name": "{event_id}.json",
+              "item": [
+                {
+                  "name": "Get Event",
+                  "id": "764b5ceb-22d8-4edd-a86c-c3c1b5418971",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/events/{{event_id}}.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "events",
+                        "{{event_id}}.json"
+                      ]
+                    },
+                    "description": "Retrieve information for a single event by its identifier."
+                  },
+                  "response": [
+                    {
+                      "id": "6405a9d1-e02b-4c7f-a9b0-c5a003dd5ca6",
+                      "name": "The requested event.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/{{event_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "{{event_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"event_date\": \"<date>\",\n  \"start_time\": \"<string>\",\n  \"end_time\": \"<string>\",\n  \"status\": \"<string>\",\n  \"guest_count\": \"<integer>\",\n  \"location_id\": \"<integer>\",\n  \"account_id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:19:38.000Z",
+                      "updatedAt": "2026-07-28T03:19:38.000Z",
+                      "uid": "35240-6405a9d1-e02b-4c7f-a9b0-c5a003dd5ca6"
+                    },
+                    {
+                      "id": "c41e95ca-3e8d-4709-b924-c607c2a61af1",
+                      "name": "Authentication credentials were missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/{{event_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "{{event_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:38.000Z",
+                      "updatedAt": "2026-07-28T03:19:38.000Z",
+                      "uid": "35240-c41e95ca-3e8d-4709-b924-c607c2a61af1"
+                    },
+                    {
+                      "id": "5669a234-aa40-465f-9b7f-2284c7318484",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/{{event_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "{{event_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:38.000Z",
+                      "updatedAt": "2026-07-28T03:19:38.000Z",
+                      "uid": "35240-5669a234-aa40-465f-9b7f-2284c7318484"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:38.000Z",
+                  "updatedAt": "2026-07-28T03:19:38.000Z",
+                  "uid": "35240-764b5ceb-22d8-4edd-a86c-c3c1b5418971"
+                }
+              ],
+              "id": "ec9566d2-fd24-454b-80a3-ba1ba7f6f38f",
+              "createdAt": "2026-07-28T03:19:38.000Z",
+              "updatedAt": "2026-07-28T03:19:38.000Z",
+              "uid": "35240-ec9566d2-fd24-454b-80a3-ba1ba7f6f38f"
+            },
+            {
+              "name": "search.json",
+              "item": [
+                {
+                  "name": "Search Events",
+                  "id": "55e26f2d-7f87-463d-a2b3-b770baea613d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/events/search.json?page=1&updated_after=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "events",
+                        "search.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Return events updated after this timestamp.",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve events matching the supplied query parameters."
+                  },
+                  "response": [
+                    {
+                      "id": "a077a17c-6515-4fc3-9838-965e105874dd",
+                      "name": "A paginated list of matching events.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/search.json?page=1&updated_after=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "search.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "The page of results to return. Each page contains 50 records.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Return events updated after this timestamp.",
+                              "key": "updated_after",
+                              "value": "<dateTime>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"event_date\": \"<date>\",\n      \"start_time\": \"<string>\",\n      \"end_time\": \"<string>\",\n      \"status\": \"<string>\",\n      \"guest_count\": \"<integer>\",\n      \"location_id\": \"<integer>\",\n      \"account_id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"event_date\": \"<date>\",\n      \"start_time\": \"<string>\",\n      \"end_time\": \"<string>\",\n      \"status\": \"<string>\",\n      \"guest_count\": \"<integer>\",\n      \"location_id\": \"<integer>\",\n      \"account_id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:19:38.000Z",
+                      "updatedAt": "2026-07-28T03:19:38.000Z",
+                      "uid": "35240-a077a17c-6515-4fc3-9838-965e105874dd"
+                    },
+                    {
+                      "id": "190305a3-da5a-4743-a9c9-65d686a0cae7",
+                      "name": "Authentication credentials were missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/search.json?page=1&updated_after=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "search.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "The page of results to return. Each page contains 50 records.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Return events updated after this timestamp.",
+                              "key": "updated_after",
+                              "value": "<dateTime>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:38.000Z",
+                      "updatedAt": "2026-07-28T03:19:38.000Z",
+                      "uid": "35240-190305a3-da5a-4743-a9c9-65d686a0cae7"
+                    },
+                    {
+                      "id": "a4761273-2f2b-4710-acc3-92b14428db87",
+                      "name": "The rate limit of 10 requests per second for the leads and events endpoints was exceeded.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/events/search.json?page=1&updated_after=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "events",
+                            "search.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "The page of results to return. Each page contains 50 records.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Return events updated after this timestamp.",
+                              "key": "updated_after",
+                              "value": "<dateTime>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:38.000Z",
+                      "updatedAt": "2026-07-28T03:19:38.000Z",
+                      "uid": "35240-a4761273-2f2b-4710-acc3-92b14428db87"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:38.000Z",
+                  "updatedAt": "2026-07-28T03:19:38.000Z",
+                  "uid": "35240-55e26f2d-7f87-463d-a2b3-b770baea613d"
+                }
+              ],
+              "id": "882656d9-e91d-4ffb-acb7-bf2bf967b4fe",
+              "createdAt": "2026-07-28T03:19:38.000Z",
+              "updatedAt": "2026-07-28T03:19:38.000Z",
+              "uid": "35240-882656d9-e91d-4ffb-acb7-bf2bf967b4fe"
+            }
+          ],
+          "id": "98389f9e-a9f8-404c-a8c0-7fae663203b5",
+          "createdAt": "2026-07-28T03:19:38.000Z",
+          "updatedAt": "2026-07-28T03:19:38.000Z",
+          "uid": "35240-98389f9e-a9f8-404c-a8c0-7fae663203b5"
+        }
+      ],
+      "id": "e57a6ecc-9678-420b-8e28-1efb5c1f5f51",
+      "createdAt": "2026-07-28T03:19:38.000Z",
+      "updatedAt": "2026-07-28T03:19:38.000Z",
+      "uid": "35240-e57a6ecc-9678-420b-8e28-1efb5c1f5f51"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.tripleseat.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.tripleseat.com"
+    },
+    {
+      "key": "event_id",
+      "value": "<integer>"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "info": {
+    "_postman_id": "8ef52718-2040-4b96-a18d-64dca14d4956",
+    "name": "Tripleseat Accounts Locations API",
+    "description": "The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:40.000Z",
+    "updatedAt": "2026-07-28T03:19:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8ef52718-2040-4b96-a18d-64dca14d4956"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "locations.json",
+          "item": [
+            {
+              "name": "List Locations",
+              "id": "8dac1fa6-a9d3-430c-9c76-819ad0990d67",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/locations.json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "locations.json"
+                  ]
+                },
+                "description": "Retrieve all locations housed within a site."
+              },
+              "response": [
+                {
+                  "id": "1c36f7b0-b153-4181-96ac-27cb620c4d21",
+                  "name": "A list of locations.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/locations.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "locations.json"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"results\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"site_id\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"site_id\": \"<integer>\",\n      \"address\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:41.000Z",
+                  "updatedAt": "2026-07-28T03:19:41.000Z",
+                  "uid": "35240-1c36f7b0-b153-4181-96ac-27cb620c4d21"
+                },
+                {
+                  "id": "149b2b32-eb86-4847-b401-98e97264ceb9",
+                  "name": "Authentication credentials were missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/locations.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "locations.json"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T03:19:41.000Z",
+                  "updatedAt": "2026-07-28T03:19:41.000Z",
+                  "uid": "35240-149b2b32-eb86-4847-b401-98e97264ceb9"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:41.000Z",
+              "updatedAt": "2026-07-28T03:19:41.000Z",
+              "uid": "35240-8dac1fa6-a9d3-430c-9c76-819ad0990d67"
+            }
+          ],
+          "id": "c776dafd-68ea-4569-891e-5bb8f14c2656",
+          "createdAt": "2026-07-28T03:19:41.000Z",
+          "updatedAt": "2026-07-28T03:19:41.000Z",
+          "uid": "35240-c776dafd-68ea-4569-891e-5bb8f14c2656"
+        }
+      ],
+      "id": "0360b160-2ec0-4da5-936b-eac4c85b0b0f",
+      "createdAt": "2026-07-28T03:19:41.000Z",
+      "updatedAt": "2026-07-28T03:19:41.000Z",
+      "uid": "35240-0360b160-2ec0-4da5-936b-eac4c85b0b0f"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.tripleseat.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.tripleseat.com"
+    }
+  ]
+}

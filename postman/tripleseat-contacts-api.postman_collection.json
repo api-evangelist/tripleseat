@@ -1,0 +1,270 @@
+{
+  "info": {
+    "_postman_id": "1aed3f88-4e38-49a5-8bfa-1a4cc7047fad",
+    "name": "Tripleseat Accounts Contacts API",
+    "description": "The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:30.000Z",
+    "updatedAt": "2026-07-28T03:19:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1aed3f88-4e38-49a5-8bfa-1a4cc7047fad"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "contacts.json",
+          "item": [
+            {
+              "name": "Create Contact",
+              "id": "c11882a7-6e3a-4264-9355-d705c0646790",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contact\": {\n    \"first_name\": \"<string>\",\n    \"account_id\": \"<integer>\",\n    \"last_name\": \"<string>\",\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/contacts.json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "contacts.json"
+                  ]
+                },
+                "description": "Create a contact and associate it with an account. Every contact must be associated with an account via account_id."
+              },
+              "response": [
+                {
+                  "id": "00a305f6-f368-4c52-a097-b0ec4aa576a9",
+                  "name": "The contact was created.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"contact\": {\n    \"first_name\": \"<string>\",\n    \"account_id\": \"<integer>\",\n    \"last_name\": \"<string>\",\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/contacts.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "contacts.json"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email_address\": \"<email>\",\n  \"phone_number\": \"<string>\",\n  \"account_id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:19:30.000Z",
+                  "updatedAt": "2026-07-28T03:19:30.000Z",
+                  "uid": "35240-00a305f6-f368-4c52-a097-b0ec4aa576a9"
+                },
+                {
+                  "id": "017e372c-e0f5-49e6-82af-58bc648006bc",
+                  "name": "The request was malformed or failed validation.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"contact\": {\n    \"first_name\": \"<string>\",\n    \"account_id\": \"<integer>\",\n    \"last_name\": \"<string>\",\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/contacts.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "contacts.json"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T03:19:30.000Z",
+                  "updatedAt": "2026-07-28T03:19:30.000Z",
+                  "uid": "35240-017e372c-e0f5-49e6-82af-58bc648006bc"
+                },
+                {
+                  "id": "662e4679-d8f8-47ab-b1d1-b32fba5ca083",
+                  "name": "Authentication credentials were missing or invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"contact\": {\n    \"first_name\": \"<string>\",\n    \"account_id\": \"<integer>\",\n    \"last_name\": \"<string>\",\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/contacts.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "contacts.json"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T03:19:30.000Z",
+                  "updatedAt": "2026-07-28T03:19:30.000Z",
+                  "uid": "35240-662e4679-d8f8-47ab-b1d1-b32fba5ca083"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:30.000Z",
+              "updatedAt": "2026-07-28T03:19:30.000Z",
+              "uid": "35240-c11882a7-6e3a-4264-9355-d705c0646790"
+            }
+          ],
+          "id": "00187d92-32fe-45b1-a85c-75fc964cf9af",
+          "createdAt": "2026-07-28T03:19:30.000Z",
+          "updatedAt": "2026-07-28T03:19:30.000Z",
+          "uid": "35240-00187d92-32fe-45b1-a85c-75fc964cf9af"
+        }
+      ],
+      "id": "bfc4061f-a1db-4f01-a02f-6de33726a4e7",
+      "createdAt": "2026-07-28T03:19:30.000Z",
+      "updatedAt": "2026-07-28T03:19:30.000Z",
+      "uid": "35240-bfc4061f-a1db-4f01-a02f-6de33726a4e7"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.tripleseat.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.tripleseat.com"
+    }
+  ]
+}

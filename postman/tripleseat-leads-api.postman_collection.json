@@ -1,0 +1,929 @@
+{
+  "info": {
+    "_postman_id": "04d0ab83-833a-4645-b21b-8425f8c42c42",
+    "name": "Tripleseat Accounts Leads API",
+    "description": "The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:39.000Z",
+    "updatedAt": "2026-07-28T03:19:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-04d0ab83-833a-4645-b21b-8425f8c42c42"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "leads.json",
+          "item": [
+            {
+              "name": "List Leads",
+              "id": "5769ac5a-277b-467d-a700-c704a43a8eee",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/leads.json?page=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "leads.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "The page of results to return. Each page contains 50 records.",
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                },
+                "description": "Retrieve a paginated list of leads. Returns 50 records per page; use the page query parameter to page through results."
+              },
+              "response": [
+                {
+                  "id": "dc848c9e-1fad-486e-a735-b62bb7e081e5",
+                  "name": "A paginated list of leads.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/leads.json?page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "leads.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"results\": [\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"email_address\": \"<email>\",\n      \"phone_number\": \"<string>\",\n      \"company\": \"<string>\",\n      \"event_description\": \"<string>\",\n      \"event_date\": \"<date>\",\n      \"start_time\": \"<string>\",\n      \"end_time\": \"<string>\",\n      \"guest_count\": \"<integer>\",\n      \"additional_information\": \"<string>\",\n      \"location_id\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"email_address\": \"<email>\",\n      \"phone_number\": \"<string>\",\n      \"company\": \"<string>\",\n      \"event_description\": \"<string>\",\n      \"event_date\": \"<date>\",\n      \"start_time\": \"<string>\",\n      \"end_time\": \"<string>\",\n      \"guest_count\": \"<integer>\",\n      \"additional_information\": \"<string>\",\n      \"location_id\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:40.000Z",
+                  "updatedAt": "2026-07-28T03:19:40.000Z",
+                  "uid": "35240-dc848c9e-1fad-486e-a735-b62bb7e081e5"
+                },
+                {
+                  "id": "e89eee3d-40c3-4e66-9733-dd00b0f4856d",
+                  "name": "Authentication credentials were missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/leads.json?page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "leads.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T03:19:40.000Z",
+                  "updatedAt": "2026-07-28T03:19:40.000Z",
+                  "uid": "35240-e89eee3d-40c3-4e66-9733-dd00b0f4856d"
+                },
+                {
+                  "id": "c4fd8d52-2145-4e1d-88cc-eeaa1d09b20c",
+                  "name": "The rate limit of 10 requests per second for the leads and events endpoints was exceeded.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/leads.json?page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "leads.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T03:19:40.000Z",
+                  "updatedAt": "2026-07-28T03:19:40.000Z",
+                  "uid": "35240-c4fd8d52-2145-4e1d-88cc-eeaa1d09b20c"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:40.000Z",
+              "updatedAt": "2026-07-28T03:19:40.000Z",
+              "uid": "35240-5769ac5a-277b-467d-a700-c704a43a8eee"
+            }
+          ],
+          "id": "0def9567-7b8b-4312-ad0a-01d6193a7786",
+          "createdAt": "2026-07-28T03:19:40.000Z",
+          "updatedAt": "2026-07-28T03:19:40.000Z",
+          "uid": "35240-0def9567-7b8b-4312-ad0a-01d6193a7786"
+        },
+        {
+          "name": "leads",
+          "item": [
+            {
+              "name": "{lead_id}.json",
+              "item": [
+                {
+                  "name": "Get Lead",
+                  "id": "8663c023-8b90-462e-b730-623d108892d3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/leads/{{lead_id}}.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "leads",
+                        "{{lead_id}}.json"
+                      ]
+                    },
+                    "description": "Retrieve information for a single lead by its identifier."
+                  },
+                  "response": [
+                    {
+                      "id": "f8e502d3-8913-46ac-8ddb-b9b89eb09146",
+                      "name": "The requested lead.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/leads/{{lead_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "leads",
+                            "{{lead_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email_address\": \"<email>\",\n  \"phone_number\": \"<string>\",\n  \"company\": \"<string>\",\n  \"event_description\": \"<string>\",\n  \"event_date\": \"<date>\",\n  \"start_time\": \"<string>\",\n  \"end_time\": \"<string>\",\n  \"guest_count\": \"<integer>\",\n  \"additional_information\": \"<string>\",\n  \"location_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:19:40.000Z",
+                      "updatedAt": "2026-07-28T03:19:40.000Z",
+                      "uid": "35240-f8e502d3-8913-46ac-8ddb-b9b89eb09146"
+                    },
+                    {
+                      "id": "665aa611-c7e0-4a76-867d-838a08670378",
+                      "name": "Authentication credentials were missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/leads/{{lead_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "leads",
+                            "{{lead_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:40.000Z",
+                      "updatedAt": "2026-07-28T03:19:40.000Z",
+                      "uid": "35240-665aa611-c7e0-4a76-867d-838a08670378"
+                    },
+                    {
+                      "id": "06ae5322-bd14-4775-b1fb-6cf6c6b992fe",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/leads/{{lead_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "leads",
+                            "{{lead_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:40.000Z",
+                      "updatedAt": "2026-07-28T03:19:40.000Z",
+                      "uid": "35240-06ae5322-bd14-4775-b1fb-6cf6c6b992fe"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:40.000Z",
+                  "updatedAt": "2026-07-28T03:19:40.000Z",
+                  "uid": "35240-8663c023-8b90-462e-b730-623d108892d3"
+                }
+              ],
+              "id": "637de758-1a4f-4997-9469-5343a66e65f6",
+              "createdAt": "2026-07-28T03:19:40.000Z",
+              "updatedAt": "2026-07-28T03:19:40.000Z",
+              "uid": "35240-637de758-1a4f-4997-9469-5343a66e65f6"
+            },
+            {
+              "name": "search.json",
+              "item": [
+                {
+                  "name": "Search Leads",
+                  "id": "a16c858f-c1d2-45fd-b882-0e9ab03bb3e4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/leads/search.json?page=1&updated_after=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "leads",
+                        "search.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Return leads updated after this timestamp.",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve leads matching the supplied query parameters."
+                  },
+                  "response": [
+                    {
+                      "id": "363dac50-7413-4419-8270-7001ee8c4810",
+                      "name": "A paginated list of matching leads.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/leads/search.json?page=1&updated_after=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "leads",
+                            "search.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "The page of results to return. Each page contains 50 records.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Return leads updated after this timestamp.",
+                              "key": "updated_after",
+                              "value": "<dateTime>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"results\": [\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"email_address\": \"<email>\",\n      \"phone_number\": \"<string>\",\n      \"company\": \"<string>\",\n      \"event_description\": \"<string>\",\n      \"event_date\": \"<date>\",\n      \"start_time\": \"<string>\",\n      \"end_time\": \"<string>\",\n      \"guest_count\": \"<integer>\",\n      \"additional_information\": \"<string>\",\n      \"location_id\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"email_address\": \"<email>\",\n      \"phone_number\": \"<string>\",\n      \"company\": \"<string>\",\n      \"event_description\": \"<string>\",\n      \"event_date\": \"<date>\",\n      \"start_time\": \"<string>\",\n      \"end_time\": \"<string>\",\n      \"guest_count\": \"<integer>\",\n      \"additional_information\": \"<string>\",\n      \"location_id\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:19:40.000Z",
+                      "updatedAt": "2026-07-28T03:19:40.000Z",
+                      "uid": "35240-363dac50-7413-4419-8270-7001ee8c4810"
+                    },
+                    {
+                      "id": "80c73d80-bb96-48ee-b0ed-7bec84336e6b",
+                      "name": "Authentication credentials were missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/leads/search.json?page=1&updated_after=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "leads",
+                            "search.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "The page of results to return. Each page contains 50 records.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Return leads updated after this timestamp.",
+                              "key": "updated_after",
+                              "value": "<dateTime>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:40.000Z",
+                      "updatedAt": "2026-07-28T03:19:40.000Z",
+                      "uid": "35240-80c73d80-bb96-48ee-b0ed-7bec84336e6b"
+                    },
+                    {
+                      "id": "8376b7c8-1714-42a1-9fef-b16600b08623",
+                      "name": "The rate limit of 10 requests per second for the leads and events endpoints was exceeded.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/leads/search.json?page=1&updated_after=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "leads",
+                            "search.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "The page of results to return. Each page contains 50 records.",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Return leads updated after this timestamp.",
+                              "key": "updated_after",
+                              "value": "<dateTime>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:40.000Z",
+                      "updatedAt": "2026-07-28T03:19:40.000Z",
+                      "uid": "35240-8376b7c8-1714-42a1-9fef-b16600b08623"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:40.000Z",
+                  "updatedAt": "2026-07-28T03:19:40.000Z",
+                  "uid": "35240-a16c858f-c1d2-45fd-b882-0e9ab03bb3e4"
+                }
+              ],
+              "id": "3c21a45c-2031-456f-b7fd-75a99d71ce0e",
+              "createdAt": "2026-07-28T03:19:40.000Z",
+              "updatedAt": "2026-07-28T03:19:40.000Z",
+              "uid": "35240-3c21a45c-2031-456f-b7fd-75a99d71ce0e"
+            },
+            {
+              "name": "create.json",
+              "item": [
+                {
+                  "name": "Create Lead",
+                  "id": "1bd5d83c-fff8-4e31-b5fd-80ec893b4695",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"lead\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\",\n    \"company\": \"<string>\",\n    \"event_description\": \"<string>\",\n    \"event_date\": \"<date>\",\n    \"start_time\": \"<string>\",\n    \"end_time\": \"<string>\",\n    \"guest_count\": \"<integer>\",\n    \"additional_information\": \"<string>\",\n    \"location_id\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/leads/create.json?public_key=<string>&location_id=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "leads",
+                        "create.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The public key for the lead form site or location.",
+                          "key": "public_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The location the lead is intended for. Required when the site has more than one location and not supplied in the body.",
+                          "key": "location_id",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "Create a lead from a public lead form using a public key. The request body wraps lead fields in a lead object. If the site has more than one location, location_id must be supplied in the body or as a query parameter."
+                  },
+                  "response": [
+                    {
+                      "id": "d77ec2a9-20bc-445c-8a68-afc9a2547ca8",
+                      "name": "The lead was created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"lead\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\",\n    \"company\": \"<string>\",\n    \"event_description\": \"<string>\",\n    \"event_date\": \"<date>\",\n    \"start_time\": \"<string>\",\n    \"end_time\": \"<string>\",\n    \"guest_count\": \"<integer>\",\n    \"additional_information\": \"<string>\",\n    \"location_id\": \"<integer>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/leads/create.json?public_key=<string>&location_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "leads",
+                            "create.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The public key for the lead form site or location.",
+                              "key": "public_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The location the lead is intended for. Required when the site has more than one location and not supplied in the body.",
+                              "key": "location_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email_address\": \"<email>\",\n  \"phone_number\": \"<string>\",\n  \"company\": \"<string>\",\n  \"event_description\": \"<string>\",\n  \"event_date\": \"<date>\",\n  \"start_time\": \"<string>\",\n  \"end_time\": \"<string>\",\n  \"guest_count\": \"<integer>\",\n  \"additional_information\": \"<string>\",\n  \"location_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:19:40.000Z",
+                      "updatedAt": "2026-07-28T03:19:40.000Z",
+                      "uid": "35240-d77ec2a9-20bc-445c-8a68-afc9a2547ca8"
+                    },
+                    {
+                      "id": "3ae2c2f9-c3b9-47d7-9e76-10720b50ae37",
+                      "name": "The request was malformed or failed validation.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"lead\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\",\n    \"company\": \"<string>\",\n    \"event_description\": \"<string>\",\n    \"event_date\": \"<date>\",\n    \"start_time\": \"<string>\",\n    \"end_time\": \"<string>\",\n    \"guest_count\": \"<integer>\",\n    \"additional_information\": \"<string>\",\n    \"location_id\": \"<integer>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/leads/create.json?public_key=<string>&location_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "leads",
+                            "create.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The public key for the lead form site or location.",
+                              "key": "public_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The location the lead is intended for. Required when the site has more than one location and not supplied in the body.",
+                              "key": "location_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:40.000Z",
+                      "updatedAt": "2026-07-28T03:19:40.000Z",
+                      "uid": "35240-3ae2c2f9-c3b9-47d7-9e76-10720b50ae37"
+                    },
+                    {
+                      "id": "8b86ccda-87c4-43ec-bf32-6c5bd3a969a9",
+                      "name": "Authentication credentials were missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"lead\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\",\n    \"company\": \"<string>\",\n    \"event_description\": \"<string>\",\n    \"event_date\": \"<date>\",\n    \"start_time\": \"<string>\",\n    \"end_time\": \"<string>\",\n    \"guest_count\": \"<integer>\",\n    \"additional_information\": \"<string>\",\n    \"location_id\": \"<integer>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/leads/create.json?public_key=<string>&location_id=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "leads",
+                            "create.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The public key for the lead form site or location.",
+                              "key": "public_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The location the lead is intended for. Required when the site has more than one location and not supplied in the body.",
+                              "key": "location_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:40.000Z",
+                      "updatedAt": "2026-07-28T03:19:40.000Z",
+                      "uid": "35240-8b86ccda-87c4-43ec-bf32-6c5bd3a969a9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:40.000Z",
+                  "updatedAt": "2026-07-28T03:19:40.000Z",
+                  "uid": "35240-1bd5d83c-fff8-4e31-b5fd-80ec893b4695"
+                }
+              ],
+              "id": "58f3122d-59b4-4dbd-b711-19fe5be9c74d",
+              "createdAt": "2026-07-28T03:19:40.000Z",
+              "updatedAt": "2026-07-28T03:19:40.000Z",
+              "uid": "35240-58f3122d-59b4-4dbd-b711-19fe5be9c74d"
+            }
+          ],
+          "id": "3713013c-4568-4526-a642-0b3bc4c4ddeb",
+          "createdAt": "2026-07-28T03:19:40.000Z",
+          "updatedAt": "2026-07-28T03:19:40.000Z",
+          "uid": "35240-3713013c-4568-4526-a642-0b3bc4c4ddeb"
+        }
+      ],
+      "id": "9bc1dad5-61c6-46a9-b538-dcbf14ccac1f",
+      "createdAt": "2026-07-28T03:19:40.000Z",
+      "updatedAt": "2026-07-28T03:19:40.000Z",
+      "uid": "35240-9bc1dad5-61c6-46a9-b538-dcbf14ccac1f"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.tripleseat.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.tripleseat.com"
+    },
+    {
+      "key": "lead_id",
+      "value": "<integer>"
+    }
+  ]
+}

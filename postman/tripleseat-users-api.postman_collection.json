@@ -1,0 +1,379 @@
+{
+  "info": {
+    "_postman_id": "b8313c0f-44ff-4448-8537-c3fcbe68629d",
+    "name": "Tripleseat Accounts Users API",
+    "description": "The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:47.000Z",
+    "updatedAt": "2026-07-28T03:19:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b8313c0f-44ff-4448-8537-c3fcbe68629d"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "users.json",
+          "item": [
+            {
+              "name": "List Users",
+              "id": "ea0943a0-2149-4c9c-9890-0d5b7fdc5115",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/users.json?page=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "users.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "The page of results to return. Each page contains 50 records.",
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                },
+                "description": "Retrieve users who can log into your Tripleseat. Creating, updating, or deleting users via the API is not supported."
+              },
+              "response": [
+                {
+                  "id": "25342d1d-b22a-4fda-9b72-3ec351934752",
+                  "name": "A paginated list of users.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/users.json?page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "users.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"results\": [\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"email_address\": \"<email>\",\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"email_address\": \"<email>\",\n      \"active\": \"<boolean>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:48.000Z",
+                  "updatedAt": "2026-07-28T03:19:48.000Z",
+                  "uid": "35240-25342d1d-b22a-4fda-9b72-3ec351934752"
+                },
+                {
+                  "id": "85a4f46c-2d0a-418d-bc4c-eb40e6159c66",
+                  "name": "Authentication credentials were missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/users.json?page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "users.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T03:19:48.000Z",
+                  "updatedAt": "2026-07-28T03:19:48.000Z",
+                  "uid": "35240-85a4f46c-2d0a-418d-bc4c-eb40e6159c66"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:48.000Z",
+              "updatedAt": "2026-07-28T03:19:48.000Z",
+              "uid": "35240-ea0943a0-2149-4c9c-9890-0d5b7fdc5115"
+            }
+          ],
+          "id": "873e770e-8615-461d-afb4-6768e0a38674",
+          "createdAt": "2026-07-28T03:19:48.000Z",
+          "updatedAt": "2026-07-28T03:19:48.000Z",
+          "uid": "35240-873e770e-8615-461d-afb4-6768e0a38674"
+        },
+        {
+          "name": "users",
+          "item": [
+            {
+              "name": "{user_id}.json",
+              "item": [
+                {
+                  "name": "Get User",
+                  "id": "98268c8e-4747-4b65-b247-ddb09837802e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/users/{{user_id}}.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "users",
+                        "{{user_id}}.json"
+                      ]
+                    },
+                    "description": "Retrieve information for a single user by identifier."
+                  },
+                  "response": [
+                    {
+                      "id": "a426774f-5974-4266-999a-08f658e6140c",
+                      "name": "The requested user.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/users/{{user_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "users",
+                            "{{user_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email_address\": \"<email>\",\n  \"active\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T03:19:48.000Z",
+                      "updatedAt": "2026-07-28T03:19:48.000Z",
+                      "uid": "35240-a426774f-5974-4266-999a-08f658e6140c"
+                    },
+                    {
+                      "id": "999d2ce7-031c-4c0c-9421-52f2a0d5b322",
+                      "name": "Authentication credentials were missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/users/{{user_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "users",
+                            "{{user_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:48.000Z",
+                      "updatedAt": "2026-07-28T03:19:48.000Z",
+                      "uid": "35240-999d2ce7-031c-4c0c-9421-52f2a0d5b322"
+                    },
+                    {
+                      "id": "cc012408-d678-4e02-93dd-fd82fca1ddad",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/users/{{user_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "users",
+                            "{{user_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:48.000Z",
+                      "updatedAt": "2026-07-28T03:19:48.000Z",
+                      "uid": "35240-cc012408-d678-4e02-93dd-fd82fca1ddad"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:48.000Z",
+                  "updatedAt": "2026-07-28T03:19:48.000Z",
+                  "uid": "35240-98268c8e-4747-4b65-b247-ddb09837802e"
+                }
+              ],
+              "id": "360a3675-3e99-4762-b7a7-1e22f3e36f89",
+              "createdAt": "2026-07-28T03:19:48.000Z",
+              "updatedAt": "2026-07-28T03:19:48.000Z",
+              "uid": "35240-360a3675-3e99-4762-b7a7-1e22f3e36f89"
+            }
+          ],
+          "id": "7416740f-b386-4657-af26-d43291f359af",
+          "createdAt": "2026-07-28T03:19:48.000Z",
+          "updatedAt": "2026-07-28T03:19:48.000Z",
+          "uid": "35240-7416740f-b386-4657-af26-d43291f359af"
+        }
+      ],
+      "id": "a166e249-34b6-4124-95d3-ee03c8a63f7a",
+      "createdAt": "2026-07-28T03:19:48.000Z",
+      "updatedAt": "2026-07-28T03:19:48.000Z",
+      "uid": "35240-a166e249-34b6-4124-95d3-ee03c8a63f7a"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.tripleseat.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.tripleseat.com"
+    },
+    {
+      "key": "user_id",
+      "value": "<integer>"
+    }
+  ]
+}

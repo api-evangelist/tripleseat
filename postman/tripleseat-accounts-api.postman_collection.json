@@ -1,0 +1,658 @@
+{
+  "info": {
+    "_postman_id": "5259f344-06f4-4c08-a0ae-9d75e94e20ec",
+    "name": "Tripleseat Accounts API",
+    "description": "The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:29.000Z",
+    "updatedAt": "2026-07-28T03:19:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5259f344-06f4-4c08-a0ae-9d75e94e20ec"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "accounts.json",
+          "item": [
+            {
+              "name": "List Accounts",
+              "id": "9f6f73b6-f6bc-4977-8b99-19a0a2d4261e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/accounts.json?page=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "accounts.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "The page of results to return. Each page contains 50 records.",
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                },
+                "description": "Retrieve a paginated list of accounts."
+              },
+              "response": [
+                {
+                  "id": "d50f6856-cf8f-4d36-9ca7-c84a6c424e5f",
+                  "name": "A paginated list of accounts.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/accounts.json?page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "accounts.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"results\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"website\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"website\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:29.000Z",
+                  "updatedAt": "2026-07-28T03:19:29.000Z",
+                  "uid": "35240-d50f6856-cf8f-4d36-9ca7-c84a6c424e5f"
+                },
+                {
+                  "id": "3b47723b-2116-4174-adc0-f22883b8b190",
+                  "name": "Authentication credentials were missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/accounts.json?page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "accounts.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "The page of results to return. Each page contains 50 records.",
+                          "key": "page",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T03:19:29.000Z",
+                  "updatedAt": "2026-07-28T03:19:29.000Z",
+                  "uid": "35240-3b47723b-2116-4174-adc0-f22883b8b190"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:29.000Z",
+              "updatedAt": "2026-07-28T03:19:29.000Z",
+              "uid": "35240-9f6f73b6-f6bc-4977-8b99-19a0a2d4261e"
+            }
+          ],
+          "id": "d3c72fbb-f6cc-4826-8794-24ccf5883111",
+          "createdAt": "2026-07-28T03:19:29.000Z",
+          "updatedAt": "2026-07-28T03:19:29.000Z",
+          "uid": "35240-d3c72fbb-f6cc-4826-8794-24ccf5883111"
+        },
+        {
+          "name": "accounts",
+          "item": [
+            {
+              "name": "{account_id}.json",
+              "item": [
+                {
+                  "name": "Get Account",
+                  "id": "9b372375-d4f5-4a41-874a-358e3fa369c3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/accounts/{{account_id}}.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "accounts",
+                        "{{account_id}}.json"
+                      ]
+                    },
+                    "description": "Retrieve information for a single account by its identifier."
+                  },
+                  "response": [
+                    {
+                      "id": "ef1fbad1-f0ea-475a-a296-00087fefc9af",
+                      "name": "The requested account.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/{{account_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            "{{account_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip_code\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"website\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:19:29.000Z",
+                      "updatedAt": "2026-07-28T03:19:29.000Z",
+                      "uid": "35240-ef1fbad1-f0ea-475a-a296-00087fefc9af"
+                    },
+                    {
+                      "id": "23419af7-d6e1-4b8d-ab1c-92ada140763a",
+                      "name": "Authentication credentials were missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/{{account_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            "{{account_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:29.000Z",
+                      "updatedAt": "2026-07-28T03:19:29.000Z",
+                      "uid": "35240-23419af7-d6e1-4b8d-ab1c-92ada140763a"
+                    },
+                    {
+                      "id": "ae144125-c707-47d1-bccc-564d790e6a19",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/{{account_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            "{{account_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:29.000Z",
+                      "updatedAt": "2026-07-28T03:19:29.000Z",
+                      "uid": "35240-ae144125-c707-47d1-bccc-564d790e6a19"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:29.000Z",
+                  "updatedAt": "2026-07-28T03:19:29.000Z",
+                  "uid": "35240-9b372375-d4f5-4a41-874a-358e3fa369c3"
+                },
+                {
+                  "name": "Update Account",
+                  "id": "88f9487c-5bde-465b-96b3-fa94259c3a92",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"account\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip_code\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"website\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/accounts/{{account_id}}.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "accounts",
+                        "{{account_id}}.json"
+                      ]
+                    },
+                    "description": "Update an existing account by its identifier."
+                  },
+                  "response": [
+                    {
+                      "id": "961aac60-ee68-4b8a-895e-f672cbc6c0d0",
+                      "name": "The updated account.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip_code\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"website\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/{{account_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            "{{account_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"address\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip_code\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"website\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:19:29.000Z",
+                      "updatedAt": "2026-07-28T03:19:29.000Z",
+                      "uid": "35240-961aac60-ee68-4b8a-895e-f672cbc6c0d0"
+                    },
+                    {
+                      "id": "af2a95ae-beff-45b8-88fe-93974521db1c",
+                      "name": "The request was malformed or failed validation.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip_code\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"website\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/{{account_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            "{{account_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:29.000Z",
+                      "updatedAt": "2026-07-28T03:19:29.000Z",
+                      "uid": "35240-af2a95ae-beff-45b8-88fe-93974521db1c"
+                    },
+                    {
+                      "id": "cdeaf208-c2ca-4a67-98e5-509c766161df",
+                      "name": "Authentication credentials were missing or invalid.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip_code\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"website\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/{{account_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            "{{account_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:29.000Z",
+                      "updatedAt": "2026-07-28T03:19:29.000Z",
+                      "uid": "35240-cdeaf208-c2ca-4a67-98e5-509c766161df"
+                    },
+                    {
+                      "id": "58e24d2e-64c4-49d3-8e35-88196c5539f8",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"account\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip_code\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"website\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/accounts/{{account_id}}.json",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "accounts",
+                            "{{account_id}}.json"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:19:29.000Z",
+                      "updatedAt": "2026-07-28T03:19:29.000Z",
+                      "uid": "35240-58e24d2e-64c4-49d3-8e35-88196c5539f8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:29.000Z",
+                  "updatedAt": "2026-07-28T03:19:29.000Z",
+                  "uid": "35240-88f9487c-5bde-465b-96b3-fa94259c3a92"
+                }
+              ],
+              "id": "cdd12fee-b74c-4407-8d17-8b03bbb14bb2",
+              "createdAt": "2026-07-28T03:19:29.000Z",
+              "updatedAt": "2026-07-28T03:19:29.000Z",
+              "uid": "35240-cdd12fee-b74c-4407-8d17-8b03bbb14bb2"
+            }
+          ],
+          "id": "35186643-6fb9-4f90-9e72-d223db0861cf",
+          "createdAt": "2026-07-28T03:19:29.000Z",
+          "updatedAt": "2026-07-28T03:19:29.000Z",
+          "uid": "35240-35186643-6fb9-4f90-9e72-d223db0861cf"
+        }
+      ],
+      "id": "ce494649-e12e-465a-8723-ccdbca88e274",
+      "createdAt": "2026-07-28T03:19:29.000Z",
+      "updatedAt": "2026-07-28T03:19:29.000Z",
+      "uid": "35240-ce494649-e12e-465a-8723-ccdbca88e274"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.tripleseat.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.tripleseat.com"
+    },
+    {
+      "key": "account_id",
+      "value": "<integer>"
+    }
+  ]
+}

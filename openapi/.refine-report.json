@@ -1,0 +1,26 @@
+{
+  "provider": "tripleseat",
+  "sources": [
+    "tripleseat-accounts-api-openapi.yml",
+    "tripleseat-contacts-api-openapi.yml",
+    "tripleseat-events-api-openapi.yml",
+    "tripleseat-leads-api-openapi.yml",
+    "tripleseat-locations-api-openapi.yml",
+    "tripleseat-sites-api-openapi.yml",
+    "tripleseat-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "tripleseat-accounts-api-openapi.yml",
+    "tripleseat-contacts-api-openapi.yml",
+    "tripleseat-events-api-openapi.yml",
+    "tripleseat-leads-api-openapi.yml",
+    "tripleseat-locations-api-openapi.yml",
+    "tripleseat-sites-api-openapi.yml",
+    "tripleseat-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
