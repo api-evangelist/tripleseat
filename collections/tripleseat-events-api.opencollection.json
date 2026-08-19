@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tripleseat Accounts Events API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.tripleseat.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/events.json",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return. Each page contains 50 records."
+              },
+              {
+                "name": "order",
+                "value": "example",
+                "type": "query",
+                "description": "Field to order results by (for example, event_start)."
+              },
+              {
+                "name": "sort_direction",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort direction for the ordered field."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of events. Returns 50 records per page; use the page query parameter to page through results."
+        },
+        {
+          "info": {
+            "name": "Get Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/events/:event_id.json",
+            "params": [
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the event."
+              }
+            ]
+          },
+          "docs": "Retrieve information for a single event by its identifier."
+        },
+        {
+          "info": {
+            "name": "Search Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/events/search.json",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return. Each page contains 50 records."
+              },
+              {
+                "name": "updated_after",
+                "value": "2026-06-03T14:30:00Z",
+                "type": "query",
+                "description": "Return events updated after this timestamp."
+              }
+            ]
+          },
+          "docs": "Retrieve events matching the supplied query parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

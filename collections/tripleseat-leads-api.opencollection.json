@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tripleseat Accounts Leads API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.tripleseat.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Leads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/leads.json",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return. Each page contains 50 records."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of leads. Returns 50 records per page; use the page query parameter to page through results."
+        },
+        {
+          "info": {
+            "name": "Get Lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/leads/:lead_id.json",
+            "params": [
+              {
+                "name": "lead_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the lead."
+              }
+            ]
+          },
+          "docs": "Retrieve information for a single lead by its identifier."
+        },
+        {
+          "info": {
+            "name": "Search Leads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tripleseat.com/v1/leads/search.json",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return. Each page contains 50 records."
+              },
+              {
+                "name": "updated_after",
+                "value": "2026-06-03T14:30:00Z",
+                "type": "query",
+                "description": "Return leads updated after this timestamp."
+              }
+            ]
+          },
+          "docs": "Retrieve leads matching the supplied query parameters."
+        },
+        {
+          "info": {
+            "name": "Create Lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tripleseat.com/v1/leads/create.json",
+            "params": [
+              {
+                "name": "public_key",
+                "value": "example",
+                "type": "query",
+                "description": "The public key for the lead form site or location."
+              },
+              {
+                "name": "location_id",
+                "value": "500123",
+                "type": "query",
+                "description": "The location the lead is intended for. Required when the site has more than one location and not supplied in the body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a lead from a public lead form using a public key. The request body wraps lead fields in a lead object. If the site has more than one location, location_id must be supplied in the body or as a query parameter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

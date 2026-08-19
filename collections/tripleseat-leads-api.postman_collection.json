@@ -1,0 +1,878 @@
+{
+  "item": [
+    {
+      "id": "38eaec03-9575-4988-bd01-56936e27c859",
+      "name": "Leads",
+      "description": {
+        "content": "Capture and retrieve leads, including the public lead form.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "89ebbafc-c98c-47a3-8e25-6cf69fe6936f",
+          "name": "List Leads",
+          "request": {
+            "name": "List Leads",
+            "description": {
+              "content": "Retrieve a paginated list of leads. Returns 50 records per page; use the page query parameter to page through results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "leads.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page of results to return. Each page contains 50 records."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93b2df51-c9d0-4088-b8c3-2f2561eaebde",
+              "name": "A paginated list of leads.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": 500123,\n      \"first_name\": \"Mark\",\n      \"last_name\": \"Lawrence\",\n      \"email_address\": \"contact@example.com\",\n      \"phone_number\": \"+1-555-867-5309\",\n      \"company\": \"Acme Events Co.\",\n      \"event_description\": \"Evening reception with plated dinner.\",\n      \"event_date\": \"2026-07-15\",\n      \"start_time\": \"18:00\",\n      \"end_time\": \"22:00\",\n      \"guest_count\": 75,\n      \"additional_information\": \"Evening reception with plated dinner.\",\n      \"location_id\": 500123,\n      \"status\": \"definite\",\n      \"created_at\": \"2026-06-03T14:30:00Z\",\n      \"updated_at\": \"2026-06-03T14:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa16b204-9abc-476f-bedf-2f53621751bd",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Unauthorized\",\n  \"status\": 1768\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6e92708-0ac0-4729-a215-388e823aa7e6",
+              "name": "The rate limit of 10 requests per second for the leads and events endpoints was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Unauthorized\",\n  \"status\": 1768\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e94d62d-4f70-4d03-9ec6-fdefe22512c4",
+          "name": "Get Lead",
+          "request": {
+            "name": "Get Lead",
+            "description": {
+              "content": "Retrieve information for a single lead by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "leads",
+                "{{lead_id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1866bd0-c24b-4bc7-a119-ea785f2a5fd7",
+              "name": "The requested lead.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads",
+                    "{{lead_id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 500123,\n  \"first_name\": \"Mark\",\n  \"last_name\": \"Lawrence\",\n  \"email_address\": \"contact@example.com\",\n  \"phone_number\": \"+1-555-867-5309\",\n  \"company\": \"Acme Events Co.\",\n  \"event_description\": \"Evening reception with plated dinner.\",\n  \"event_date\": \"2026-07-15\",\n  \"start_time\": \"18:00\",\n  \"end_time\": \"22:00\",\n  \"guest_count\": 75,\n  \"additional_information\": \"Evening reception with plated dinner.\",\n  \"location_id\": 500123,\n  \"status\": \"definite\",\n  \"created_at\": \"2026-06-03T14:30:00Z\",\n  \"updated_at\": \"2026-06-03T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab07df1e-491b-4a5c-b54f-56c976de1122",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads",
+                    "{{lead_id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Unauthorized\",\n  \"status\": 1768\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7284fd7-9078-4682-b46c-95b0c5b21690",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads",
+                    "{{lead_id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Unauthorized\",\n  \"status\": 1768\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7dede70-7fbd-4535-9221-6a63d21c46a1",
+          "name": "Search Leads",
+          "request": {
+            "name": "Search Leads",
+            "description": {
+              "content": "Retrieve leads matching the supplied query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "leads",
+                "search.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page of results to return. Each page contains 50 records."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<dateTime>",
+                  "description": "Return leads updated after this timestamp."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f86d9879-7a5f-49b7-8f28-78f3c0d066e2",
+              "name": "A paginated list of matching leads.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads",
+                    "search.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2026-06-03T14:30:00Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": 500123,\n      \"first_name\": \"Mark\",\n      \"last_name\": \"Lawrence\",\n      \"email_address\": \"contact@example.com\",\n      \"phone_number\": \"+1-555-867-5309\",\n      \"company\": \"Acme Events Co.\",\n      \"event_description\": \"Evening reception with plated dinner.\",\n      \"event_date\": \"2026-07-15\",\n      \"start_time\": \"18:00\",\n      \"end_time\": \"22:00\",\n      \"guest_count\": 75,\n      \"additional_information\": \"Evening reception with plated dinner.\",\n      \"location_id\": 500123,\n      \"status\": \"definite\",\n      \"created_at\": \"2026-06-03T14:30:00Z\",\n      \"updated_at\": \"2026-06-03T14:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d50e09c1-e559-40a4-ab2e-c9466a91d0f6",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads",
+                    "search.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2026-06-03T14:30:00Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Unauthorized\",\n  \"status\": 1768\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be9139d9-a394-4fe4-89fe-45646a44e8ca",
+              "name": "The rate limit of 10 requests per second for the leads and events endpoints was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads",
+                    "search.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2026-06-03T14:30:00Z"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Unauthorized\",\n  \"status\": 1768\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd6fc942-8f74-4e4c-9be4-6fa1145ec221",
+          "name": "Create Lead",
+          "request": {
+            "name": "Create Lead",
+            "description": {
+              "content": "Create a lead from a public lead form using a public key. The request body wraps lead fields in a lead object. If the site has more than one location, location_id must be supplied in the body or as a query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "leads",
+                "create.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "public_key",
+                  "value": "<string>",
+                  "description": "(Required) The public key for the lead form site or location."
+                },
+                {
+                  "disabled": false,
+                  "key": "location_id",
+                  "value": "<integer>",
+                  "description": "The location the lead is intended for. Required when the site has more than one location and not supplied in the body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lead\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email_address\": \"<email>\",\n    \"phone_number\": \"<string>\",\n    \"company\": \"<string>\",\n    \"event_description\": \"<string>\",\n    \"event_date\": \"<date>\",\n    \"start_time\": \"<string>\",\n    \"end_time\": \"<string>\",\n    \"guest_count\": \"<integer>\",\n    \"additional_information\": \"<string>\",\n    \"location_id\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "11365eee-8932-45c5-b18b-487ea270df95",
+              "name": "The lead was created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads",
+                    "create.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "public_key",
+                      "value": "example"
+                    },
+                    {
+                      "key": "location_id",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lead\": {\n    \"first_name\": \"Mark\",\n    \"last_name\": \"Lawrence\",\n    \"email_address\": \"contact@example.com\",\n    \"phone_number\": \"+1-555-867-5309\",\n    \"company\": \"Acme Events Co.\",\n    \"event_description\": \"Evening reception with plated dinner.\",\n    \"event_date\": \"2026-07-15\",\n    \"start_time\": \"18:00\",\n    \"end_time\": \"22:00\",\n    \"guest_count\": 75,\n    \"additional_information\": \"Evening reception with plated dinner.\",\n    \"location_id\": 500123\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 500123,\n  \"first_name\": \"Mark\",\n  \"last_name\": \"Lawrence\",\n  \"email_address\": \"contact@example.com\",\n  \"phone_number\": \"+1-555-867-5309\",\n  \"company\": \"Acme Events Co.\",\n  \"event_description\": \"Evening reception with plated dinner.\",\n  \"event_date\": \"2026-07-15\",\n  \"start_time\": \"18:00\",\n  \"end_time\": \"22:00\",\n  \"guest_count\": 75,\n  \"additional_information\": \"Evening reception with plated dinner.\",\n  \"location_id\": 500123,\n  \"status\": \"definite\",\n  \"created_at\": \"2026-06-03T14:30:00Z\",\n  \"updated_at\": \"2026-06-03T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4034a2b9-df92-4875-88e2-22542cce4261",
+              "name": "The request was malformed or failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads",
+                    "create.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "public_key",
+                      "value": "example"
+                    },
+                    {
+                      "key": "location_id",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lead\": {\n    \"first_name\": \"Mark\",\n    \"last_name\": \"Lawrence\",\n    \"email_address\": \"contact@example.com\",\n    \"phone_number\": \"+1-555-867-5309\",\n    \"company\": \"Acme Events Co.\",\n    \"event_description\": \"Evening reception with plated dinner.\",\n    \"event_date\": \"2026-07-15\",\n    \"start_time\": \"18:00\",\n    \"end_time\": \"22:00\",\n    \"guest_count\": 75,\n    \"additional_information\": \"Evening reception with plated dinner.\",\n    \"location_id\": 500123\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Unauthorized\",\n  \"status\": 1768\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0f66c17-08a7-4193-9e88-1e46f6ddb7be",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leads",
+                    "create.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "public_key",
+                      "value": "example"
+                    },
+                    {
+                      "key": "location_id",
+                      "value": "500123"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lead\": {\n    \"first_name\": \"Mark\",\n    \"last_name\": \"Lawrence\",\n    \"email_address\": \"contact@example.com\",\n    \"phone_number\": \"+1-555-867-5309\",\n    \"company\": \"Acme Events Co.\",\n    \"event_description\": \"Evening reception with plated dinner.\",\n    \"event_date\": \"2026-07-15\",\n    \"start_time\": \"18:00\",\n    \"end_time\": \"22:00\",\n    \"guest_count\": 75,\n    \"additional_information\": \"Evening reception with plated dinner.\",\n    \"location_id\": 500123\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Unauthorized\",\n  \"status\": 1768\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tripleseat.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier of the lead.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "lead_id"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.tripleseat.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a6c8d0b9-99e4-485f-9fea-b5ebfdf9be3e",
+    "name": "Tripleseat Accounts Leads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}
