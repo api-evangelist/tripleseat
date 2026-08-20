@@ -25,6 +25,13 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tripleseat.png
 tags:
   - Restaurant
+  - Event
+  - Catering
+  - Leads
+  - Webhook
+  - Sales
+tags_raw:
+  - Restaurant
   - Events
   - Catering
   - Leads
@@ -41,6 +48,8 @@ apis:
   humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
   baseURL: https://api.tripleseat.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -229,6 +238,8 @@ apis:
   humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
   baseURL: https://api.tripleseat.com
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -605,6 +616,8 @@ apis:
   humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
   baseURL: https://api.tripleseat.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
