@@ -9,6 +9,18 @@ description: >-
   CONVERT_LEAD_TO_BOOKING, signed with a SHA256-HMAC X-Signature header. Authentication moved from OAuth 1.0 to OAuth
   2.0, with OAuth 1.0 discontinued on July 1, 2026, and v1 endpoints served from api.tripleseat.com.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
