@@ -440,6 +440,8 @@ apis:
   humanURL: https://support.tripleseat.com/hc/en-us/articles/205162108-API-Overview
   baseURL: https://api.tripleseat.com
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
