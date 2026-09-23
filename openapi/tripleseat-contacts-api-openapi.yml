@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Tripleseat Accounts Contacts API
-  description: The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.
+  title: Tripleseat Contacts API
+  description: The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues.
   version: v1
   contact:
     name: Kin Lane
@@ -77,6 +77,39 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Contact:
+      type: object
+      description: An individual associated with an account.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the contact.
+          example: 500123
+        first_name:
+          type: string
+          example: Mark
+        last_name:
+          type: string
+          example: Lawrence
+        email_address:
+          type: string
+          format: email
+          example: contact@example.com
+        phone_number:
+          type: string
+          example: +1-555-867-5309
+        account_id:
+          type: integer
+          description: Identifier of the account this contact belongs to.
+          example: 500123
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-06-03T14:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          example: '2026-06-03T14:30:00Z'
     Error:
       type: object
       description: A standard error response.
@@ -113,48 +146,15 @@ components:
       required:
       - first_name
       - account_id
-    Contact:
-      type: object
-      description: An individual associated with an account.
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the contact.
-          example: 500123
-        first_name:
-          type: string
-          example: Mark
-        last_name:
-          type: string
-          example: Lawrence
-        email_address:
-          type: string
-          format: email
-          example: contact@example.com
-        phone_number:
-          type: string
-          example: +1-555-867-5309
-        account_id:
-          type: integer
-          description: Identifier of the account this contact belongs to.
-          example: 500123
-        created_at:
-          type: string
-          format: date-time
-          example: '2026-06-03T14:30:00Z'
-        updated_at:
-          type: string
-          format: date-time
-          example: '2026-06-03T14:30:00Z'
   responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
+    BadRequest:
+      description: The request was malformed or failed validation.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:

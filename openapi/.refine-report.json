@@ -1,13 +1,7 @@
 {
   "provider": "tripleseat",
   "sources": [
-    "tripleseat-accounts-api-openapi.yml",
-    "tripleseat-contacts-api-openapi.yml",
-    "tripleseat-events-api-openapi.yml",
-    "tripleseat-leads-api-openapi.yml",
-    "tripleseat-locations-api-openapi.yml",
-    "tripleseat-sites-api-openapi.yml",
-    "tripleseat-users-api-openapi.yml"
+    "_original/tripleseat-openapi.yml"
   ],
   "outputs": [
     "tripleseat-accounts-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tripleseat-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "tripleseat-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tripleseat-contacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tripleseat-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tripleseat-leads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tripleseat-locations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tripleseat-sites-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tripleseat-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

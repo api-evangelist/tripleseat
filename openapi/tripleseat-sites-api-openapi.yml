@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Tripleseat Accounts Sites API
-  description: The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues. It exposes leads, events, accounts, contacts, locations, sites, and users, plus a public lead form endpoint for capturing inquiries directly into Tripleseat. The API is served from api.tripleseat.com under the v1 path, returns JSON or XML, paginates with the page query parameter (50 records per page), and uses OAuth 2.0 for authentication. Webhooks (documented in the companion AsyncAPI/description) emit lead and booking lifecycle events signed with a SHA256-HMAC X-Signature header.
+  title: Tripleseat Sites API
+  description: The Tripleseat REST API provides programmatic access to the event and catering sales lifecycle for restaurants, hotels, and unique venues.
   version: v1
   contact:
     name: Kin Lane
@@ -52,26 +52,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Site:
-      type: object
-      description: A group of venues or locations.
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the site.
-          example: 500123
-        name:
-          type: string
-          description: Name of the site.
-          example: Spring Gala Dinner
     Error:
       type: object
       description: A standard error response.
@@ -84,6 +65,25 @@ components:
           type: integer
           description: The HTTP status code associated with the error.
           example: definite
+    Site:
+      type: object
+      description: A group of venues or locations.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the site.
+          example: 500123
+        name:
+          type: string
+          description: Name of the site.
+          example: Spring Gala Dinner
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2
