@@ -110,18 +110,6 @@ components:
           type: string
           format: date-time
           example: '2026-06-03T14:30:00Z'
-    Error:
-      type: object
-      description: A standard error response.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message.
-          example: Unauthorized
-        status:
-          type: integer
-          description: The HTTP status code associated with the error.
-          example: definite
     ContactCreate:
       type: object
       description: Fields accepted when creating a contact.
@@ -146,15 +134,27 @@ components:
       required:
       - first_name
       - account_id
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
   responses:
-    BadRequest:
-      description: The request was malformed or failed validation.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
+    BadRequest:
+      description: The request was malformed or failed validation.
       content:
         application/json:
           schema:

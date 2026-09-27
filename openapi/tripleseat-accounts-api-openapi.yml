@@ -180,38 +180,7 @@ components:
         type: integer
         minimum: 1
         default: 1
-  responses:
-    BadRequest:
-      description: The request was malformed or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      description: A standard error response.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message.
-          example: Unauthorized
-        status:
-          type: integer
-          description: The HTTP status code associated with the error.
-          example: definite
     AccountUpdate:
       type: object
       description: Fields accepted when updating an account.
@@ -237,6 +206,18 @@ components:
         website:
           type: string
           example: https://example.com
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
     Account:
       type: object
       description: An organization or company record in Tripleseat.
@@ -276,6 +257,25 @@ components:
           type: string
           format: date-time
           example: '2026-06-03T14:30:00Z'
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

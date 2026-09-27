@@ -90,7 +90,36 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: The page of results to return. Each page contains 50 records.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    UserId:
+      name: user_id
+      in: path
+      description: The unique identifier of the user.
+      required: true
+      schema:
+        type: integer
   schemas:
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
     User:
       type: object
       description: A person who can log into Tripleseat.
@@ -113,35 +142,6 @@ components:
           type: boolean
           description: Whether the user account is active.
           example: true
-    Error:
-      type: object
-      description: A standard error response.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message.
-          example: Unauthorized
-        status:
-          type: integer
-          description: The HTTP status code associated with the error.
-          example: definite
-  parameters:
-    UserId:
-      name: user_id
-      in: path
-      description: The unique identifier of the user.
-      required: true
-      schema:
-        type: integer
-    Page:
-      name: page
-      in: query
-      description: The page of results to return. Each page contains 50 records.
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   responses:
     Unauthorized:
       description: Authentication credentials were missing or invalid.
