@@ -53,18 +53,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Error:
-      type: object
-      description: A standard error response.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message.
-          example: Unauthorized
-        status:
-          type: integer
-          description: The HTTP status code associated with the error.
-          example: definite
     Site:
       type: object
       description: A group of venues or locations.
@@ -77,6 +65,18 @@ components:
           type: string
           description: Name of the site.
           example: Spring Gala Dinner
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
   responses:
     Unauthorized:
       description: Authentication credentials were missing or invalid.
