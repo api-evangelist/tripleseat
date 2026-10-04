@@ -174,25 +174,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    TooManyRequests:
-      description: The rate limit of 10 requests per second for the leads and events endpoints was exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Event:
       type: object
@@ -256,6 +237,13 @@ components:
           description: The HTTP status code associated with the error.
           example: definite
   parameters:
+    EventId:
+      name: event_id
+      in: path
+      description: The unique identifier of the event.
+      required: true
+      schema:
+        type: integer
     Page:
       name: page
       in: query
@@ -265,13 +253,25 @@ components:
         type: integer
         minimum: 1
         default: 1
-    EventId:
-      name: event_id
-      in: path
-      description: The unique identifier of the event.
-      required: true
-      schema:
-        type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: The rate limit of 10 requests per second for the leads and events endpoints was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

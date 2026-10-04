@@ -259,8 +259,8 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    BadRequest:
-      description: The request was malformed or failed validation.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
@@ -271,14 +271,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
+    BadRequest:
+      description: The request was malformed or failed validation.
       content:
         application/json:
           schema:
@@ -415,13 +415,6 @@ components:
           description: The HTTP status code associated with the error.
           example: definite
   parameters:
-    LeadId:
-      name: lead_id
-      in: path
-      description: The unique identifier of the lead.
-      required: true
-      schema:
-        type: integer
     Page:
       name: page
       in: query
@@ -431,6 +424,13 @@ components:
         type: integer
         minimum: 1
         default: 1
+    LeadId:
+      name: lead_id
+      in: path
+      description: The unique identifier of the lead.
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     oauth2:
       type: oauth2

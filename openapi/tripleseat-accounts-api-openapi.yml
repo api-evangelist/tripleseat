@@ -164,12 +164,6 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    BadRequest:
-      description: The request was malformed or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
       content:
@@ -182,36 +176,38 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    Page:
-      name: page
-      in: query
-      description: The page of results to return. Each page contains 50 records.
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    AccountId:
-      name: account_id
-      in: path
-      description: The unique identifier of the account.
-      required: true
-      schema:
-        type: integer
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    AccountUpdate:
       type: object
-      description: A standard error response.
+      description: Fields accepted when updating an account.
       properties:
-        error:
+        name:
           type: string
-          description: A human-readable error message.
-          example: Unauthorized
-        status:
-          type: integer
-          description: The HTTP status code associated with the error.
-          example: definite
+          example: Spring Gala Dinner
+        address:
+          type: string
+          example: 123 Main Street
+        city:
+          type: string
+          example: Boston
+        state:
+          type: string
+          example: MA
+        zip_code:
+          type: string
+          example: 02108
+        phone_number:
+          type: string
+          example: +1-555-867-5309
+        website:
+          type: string
+          example: https://example.com
     Account:
       type: object
       description: An organization or company record in Tripleseat.
@@ -251,31 +247,35 @@ components:
           type: string
           format: date-time
           example: '2026-06-03T14:30:00Z'
-    AccountUpdate:
+    Error:
       type: object
-      description: Fields accepted when updating an account.
+      description: A standard error response.
       properties:
-        name:
+        error:
           type: string
-          example: Spring Gala Dinner
-        address:
-          type: string
-          example: 123 Main Street
-        city:
-          type: string
-          example: Boston
-        state:
-          type: string
-          example: MA
-        zip_code:
-          type: string
-          example: 02108
-        phone_number:
-          type: string
-          example: +1-555-867-5309
-        website:
-          type: string
-          example: https://example.com
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: The page of results to return. Each page contains 50 records.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    AccountId:
+      name: account_id
+      in: path
+      description: The unique identifier of the account.
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     oauth2:
       type: oauth2

@@ -90,14 +90,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    UserId:
-      name: user_id
-      in: path
-      description: The unique identifier of the user.
-      required: true
-      schema:
-        type: integer
     Page:
       name: page
       in: query
@@ -107,7 +113,26 @@ components:
         type: integer
         minimum: 1
         default: 1
+    UserId:
+      name: user_id
+      in: path
+      description: The unique identifier of the user.
+      required: true
+      schema:
+        type: integer
   schemas:
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
     User:
       type: object
       description: A person who can log into Tripleseat.
@@ -130,31 +155,6 @@ components:
           type: boolean
           description: Whether the user account is active.
           example: true
-    Error:
-      type: object
-      description: A standard error response.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message.
-          example: Unauthorized
-        status:
-          type: integer
-          description: The HTTP status code associated with the error.
-          example: definite
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2
