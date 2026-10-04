@@ -721,6 +721,9 @@ apis:
   - type: Examples
     url: examples/tripleseat-webhooks-webhook-headers-example.json
 common:
+  - type: CapabilityMap
+    url: capabilities/tripleseat-capability-edges.yml
+    name: Tripleseat Business Capability Map
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/tripleseat/overview
   - type: AgenticAccess
