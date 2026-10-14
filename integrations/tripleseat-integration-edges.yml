@@ -1,10 +1,27 @@
 generated: '2026-10-14'
 method: searched
 checked:
+- mews-com/integrations/mews-com-integration-edges.yml
 - olo/integrations/olo-integration-edges.yml
 source:
 - olo/integrations/olo-integration-edges.yml
 edges:
+- partner_name: Mews (own)
+  partner: mews-com
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.mews.com/en/products/marketplace/tripleseat
+  mirror_of: mews-com/integrations/mews-com-integration-edges.yml
+  apps:
+  - Tripleseat
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
 - partner_name: Olo (own)
   partner: olo
   partner_match: mirror
