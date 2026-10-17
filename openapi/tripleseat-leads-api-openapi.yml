@@ -258,31 +258,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: The rate limit of 10 requests per second for the leads and events endpoints was exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Lead:
       type: object
@@ -356,6 +331,18 @@ components:
           format: date-time
           description: Timestamp when the lead was last updated.
           example: '2026-06-03T14:30:00Z'
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
     LeadCreate:
       type: object
       description: Fields accepted when creating a lead via the public lead form.
@@ -402,19 +389,39 @@ components:
       - first_name
       - last_name
       - email_address
-    Error:
-      type: object
-      description: A standard error response.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message.
-          example: Unauthorized
-        status:
-          type: integer
-          description: The HTTP status code associated with the error.
-          example: definite
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: The rate limit of 10 requests per second for the leads and events endpoints was exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    LeadId:
+      name: lead_id
+      in: path
+      description: The unique identifier of the lead.
+      required: true
+      schema:
+        type: integer
     Page:
       name: page
       in: query
@@ -424,13 +431,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-    LeadId:
-      name: lead_id
-      in: path
-      description: The unique identifier of the lead.
-      required: true
-      schema:
-        type: integer
   securitySchemes:
     oauth2:
       type: oauth2

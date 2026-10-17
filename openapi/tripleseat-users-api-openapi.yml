@@ -90,36 +90,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    Page:
-      name: page
-      in: query
-      description: The page of results to return. Each page contains 50 records.
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    UserId:
-      name: user_id
-      in: path
-      description: The unique identifier of the user.
-      required: true
-      schema:
-        type: integer
   schemas:
     Error:
       type: object
@@ -155,6 +125,36 @@ components:
           type: boolean
           description: Whether the user account is active.
           example: true
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: The page of results to return. Each page contains 50 records.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    UserId:
+      name: user_id
+      in: path
+      description: The unique identifier of the user.
+      required: true
+      schema:
+        type: integer
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

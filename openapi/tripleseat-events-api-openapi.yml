@@ -175,6 +175,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Unauthorized
+        status:
+          type: integer
+          description: The HTTP status code associated with the error.
+          example: definite
     Event:
       type: object
       description: A booked or in-progress event in the sales lifecycle.
@@ -224,42 +236,7 @@ components:
           type: string
           format: date-time
           example: '2026-06-03T14:30:00Z'
-    Error:
-      type: object
-      description: A standard error response.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message.
-          example: Unauthorized
-        status:
-          type: integer
-          description: The HTTP status code associated with the error.
-          example: definite
-  parameters:
-    EventId:
-      name: event_id
-      in: path
-      description: The unique identifier of the event.
-      required: true
-      schema:
-        type: integer
-    Page:
-      name: page
-      in: query
-      description: The page of results to return. Each page contains 50 records.
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: The rate limit of 10 requests per second for the leads and events endpoints was exceeded.
       content:
@@ -272,6 +249,29 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: The page of results to return. Each page contains 50 records.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    EventId:
+      name: event_id
+      in: path
+      description: The unique identifier of the event.
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     oauth2:
       type: oauth2
