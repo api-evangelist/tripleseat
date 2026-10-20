@@ -1,10 +1,20 @@
-generated: '2026-10-14'
+generated: '2026-10-20'
 method: searched
+source:
+- olo/integrations/olo-integration-edges.yml
+- https://zapier.com/apps/tripleseat/integrations
+- https://n8n.io/integrations/tripleseat/
+- https://composio.dev/toolkits/tripleseat
+- https://monid.ai/tools/tripleseat
 checked:
 - mews-com/integrations/mews-com-integration-edges.yml
 - olo/integrations/olo-integration-edges.yml
-source:
-- olo/integrations/olo-integration-edges.yml
+- https://composio.dev/toolkits/tripleseat
+- https://monid.ai/tools/tripleseat
+- https://n8n.io/integrations/tripleseat/
+- https://zapier.com/apps/tripleseat/integrations
+summary: null
+marketplace_apps: []
 edges:
 - partner_name: Mews (own)
   partner: mews-com
@@ -39,3 +49,4 @@ edges:
   detected: '2026-10-14'
   detected_by: mirror-platform-listings.py
   category: Event Management
+templates: []
